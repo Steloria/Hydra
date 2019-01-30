@@ -1,0 +1,19 @@
+{
+  "name": "Snip",
+  "version": "1.0.0",
+  "description": "A code snippets manager",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Electron",
+    "Snippets",
+    "Code",
+    "Manager"
+  ],
+  "author": "Medrupaloscil",
+  "devDependencies": {
+    "electron": "^3.0.7"
+  }
+}

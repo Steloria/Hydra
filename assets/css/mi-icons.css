@@ -1,0 +1,1621 @@
+.mi-user {
+	position: absolute;
+	transition: all 0.2s;
+}
+.mi-user::before {
+	content: '';
+	position: absolute;
+	width: 1em;
+	height: 1em;
+	background-color: currentColor;
+	border-radius: 100%;
+	margin-left: 0.2em;
+	border: 2px solid;
+}
+.mi-user::after {
+	content: '';
+	position: absolute;
+	height: 1em;
+	width: 1.4em;
+	background-color: currentColor;
+	border-radius: 100% 100% 0 0;
+	top: 1.5em;
+	border: 2px solid;
+}
+.mi-user.empty::before, .mi-user.empty::after {
+	background-color: transparent;
+}
+
+.mi-power {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2em;
+	height: 2em;
+	border: 2px solid;
+	border-color: transparent transparent transparent currentColor;
+	border-radius: 100%;
+	transform: rotate(20deg);
+}
+.mi-power::before {
+	width: 2px;
+	content: '';
+	height: 1em;
+	left: 0.6em;
+	top: -0.3em;
+	background-color: currentColor;
+	position: absolute;
+	transform: rotate(-20deg);
+}
+.mi-power::after {
+	content: '';
+	left: -2px;
+	top: -2px;
+	position: absolute;
+	width: 2em;
+	height: 2em;
+	border: 2px solid;
+	border-color: transparent currentColor currentColor currentColor;
+	border-radius: 100%;
+	transform: rotate(-40deg);
+}
+
+.mi-home {
+	position: absolute;
+	transition: all 0.2s;
+	width: 1em;
+	height: 1.4em;
+	background-color: currentColor;
+	box-shadow: 1.4em 0 0 0 currentColor;
+	margin-top: 1.3em;
+}
+.mi-home::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width: 0 1.6em 1.6em 1.6em;
+	border-color: transparent transparent currentColor transparent;
+	top: -1.4em;
+	left: -0.4em;
+}
+
+.mi-pen {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0.7em;
+	height: 2em;
+	background-color: currentColor;
+	transform: rotate(40deg);
+	margin-left: 0.5em;
+	margin-top: 0.5em;
+}
+.mi-pen::before {
+	content: '';
+	position: absolute;
+	background-color: currentColor;	
+	width: 0.7em;
+	height: 0.5em;
+	border-radius: 100% 100% 0 0;
+	top: -0.6em;
+	left: 0;
+}
+.mi-pen::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 0;
+	top: 2.1em;
+	border: solid;
+	border-width: 0.35em 0.35em 0 0.35em;
+	border-color: currentColor transparent transparent transparent;
+}
+
+.mi-email {
+	position: absolute;
+	transition: all 0.2s;
+	width: 3em;
+    height: 2em;
+    border-radius: 0.3em;
+	border: 2px solid currentColor;
+	background-color: currentColor;
+	margin-left: -0.5em;
+}
+.mi-email::before {
+	content: '';
+	position: absolute;
+	width: 2px;
+	height: 1.5em;
+	background-color: #FFF;
+	transform-origin: right;
+	transform: rotate(-55deg);
+	left: 0.8em;
+}
+.mi-email::after {
+	content: '';
+	position: absolute;
+	width: 2px;
+	height: 1.5em;
+	background-color: #FFF;
+	transform-origin: left;
+	transform: rotate(55deg);
+	right: 0.8em;
+}
+.mi-email.empty{
+	background-color: transparent;
+}
+.mi-email.empty::before, .mi-email.empty::after {
+	background-color: currentColor;
+}
+
+.mi-phone {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2em;
+	height: 2em;
+	border: solid;
+	border-radius: 100%;
+	border-width: 0.2em;
+	border-color: transparent transparent transparent currentColor;
+	transform: rotate(-45deg);
+}
+.mi-phone::before {
+	content: '';
+	position: absolute;
+	background-color: currentColor;
+	height: 0.4em;
+    width: 0.8em;
+    border-radius: 0.2em 0.2em 0 0;
+    transform: rotate(126deg);
+    left: 0em;
+    top: -0.1em;
+}
+.mi-phone::after {
+	content: '';
+	position: absolute;
+	background-color: currentColor;
+	height: 0.4em;
+    width: 0.8em;
+    border-radius: 0.2em 0.2em 0 0;
+    transform: rotate(55deg);
+    transform-origin: bottom;
+    left: -0.3em;
+    top: 1.4em;
+}
+
+.mi-calendar {
+	position: absolute;
+	transition: all 0.2s;
+	width: 3em;
+    height: 1.5em;
+    border-radius: 0.3em;
+    border: 0.2em solid currentColor;
+    border-top-width: 1em;
+    background-color: currentColor;
+	margin-left: -0.5em;
+}
+.mi-calendar::before {
+	content: '';
+	position: absolute;
+	width: 0.3em;
+	height: 0.5em;
+	top: -1.5em;
+	left: 0.2em;
+	background-color: currentColor;
+	box-shadow: 2.3em 0 0 0 currentColor;
+}
+.mi-calendar::after {
+	content: '';
+	position: absolute;
+	height: 0.2em;
+	width: 0.4em;
+	background-color: #FFF;
+	left: 0.1em;
+	top: 0.2em;
+	box-shadow:
+		0.6em 0 0 0 #FFF,
+		1.2em 0 0 0 #FFF,
+		1.8em 0 0 0 #FFF,
+		2.4em 0 0 0 #FFF,
+		0em 0.4em 0 0 #FFF,
+		0.6em 0.4em 0 0 #FFF,
+		1.2em 0.4em 0 0 #FFF,
+		1.8em 0.4em 0 0 #FFF,
+		2.4em 0.4em 0 0 #FFF,
+		0em 0.8em 0 0 #FFF,
+		0.6em 0.8em 0 0 #FFF,
+		1.2em 0.8em 0 0 #FFF,
+		1.8em 0.8em 0 0 #FFF,
+		2.4em 0.8em 0 0 #FFF;
+}
+.mi-calendar.empty {
+	background-color: transparent;
+}
+.mi-calendar.empty::after {
+	background-color: currentColor;
+	box-shadow:
+		0.6em 0 0 0,
+		1.2em 0 0 0,
+		1.8em 0 0 0,
+		2.4em 0 0 0,
+		0em 0.4em 0 0,
+		0.6em 0.4em 0 0,
+		1.2em 0.4em 0 0,
+		1.8em 0.4em 0 0,
+		2.4em 0.4em 0 0,
+		0em 0.8em 0 0,
+		0.6em 0.8em 0 0,
+		1.2em 0.8em 0 0,
+		1.8em 0.8em 0 0,
+		2.4em 0.8em 0 0;
+}
+
+.mi-hour {
+	position: absolute;
+	transition: all 0.2s;
+	height: 2.5em;
+	width: 2.5em;
+	border: 0.2em solid currentColor;
+	border-radius: 100%;
+	background-color: currentColor;
+	margin-left: -0.5em;
+	margin-top: -0.5em;
+}
+.mi-hour::before {
+	content: '';
+	position: absolute;
+	width: 0.2em;
+	height: 1.2em;
+	left: 1.1em;
+	top: 0.3em;
+	background-color: #FFF;
+}
+.mi-hour::after {
+	content: '';
+	position: absolute;
+	width: 0.7em;
+	height: 0.2em;
+	left: 1.2em;
+	top: 1.3em;
+	background-color: #FFF;
+}
+.mi-hour.empty {
+	background-color: transparent;
+}
+.mi-hour.empty::before, .mi-hour.empty::after {
+	background-color: currentColor;
+}
+
+.mi-adjust {
+	position: absolute;
+	transition: all 0.2s;
+	height: 2.5em;
+	width: 2.5em;
+	border: 0.2em solid currentColor;
+	border-radius: 100%;
+	margin-left: -0.5em;
+	margin-top: -0.5em;
+}
+.mi-adjust::before {
+	content: '';
+	position: absolute;
+	height: 0;
+	width: 0;
+	border: 1.4em solid;
+	border-color: transparent transparent currentColor currentColor;
+	transform: rotate(45deg);
+	top: -0.1em;
+	left: -0.1em;
+	border-radius: 100%;
+}
+
+.mi-menu {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.3em;
+	width: 2.5em;
+	border-radius: 0.1em;
+	background-color: currentColor;
+	box-shadow: 0 0.7em 0 0;
+	margin-left: -0.3em;
+}
+.mi-menu::before {
+	content: '';
+	position: absolute;
+	height: 0.3em;
+	width: 2.5em;
+	border-radius: 0.1em;
+	background-color: currentColor;
+	top: 1.4em;
+	left: 0;
+}
+
+.mi-close {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.3em;
+	width: 2.5em;
+	border-radius: 0.1em;
+	background-color: currentColor;
+	transform: rotate(45deg);
+	margin-left: -0.3em;
+	margin-top: 0.5em;
+}
+.mi-close::before {
+	content: '';
+	position: absolute;
+	height: 0.3em;
+	width: 2.5em;
+	border-radius: 0.1em;
+	background-color: currentColor;
+	transform: rotate(90deg);
+	left: 0;
+	top: 0;
+}
+
+.mi-plus {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.3em;
+	width: 2em;
+	border-radius: 0.1em;
+	background-color: currentColor;
+	margin-top: 0.5em;
+}
+.mi-plus::before {
+	content: '';
+	position: absolute;
+	height: 0.3em;
+	width: 2em;
+	border-radius: 0.1em;
+	background-color: currentColor;
+	transform: rotate(90deg);
+	left: 0;
+	top: 0;
+}
+
+.mi-left {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.3em;
+	width: 1.5em;
+	border-radius: 0 0.1em 0.1em 0;
+	background-color: currentColor;
+	transform: rotate(-45deg);
+	margin-top: 0.5em;
+}
+.mi-left::before {
+	content: '';
+	position: absolute;
+	height: 0.3em;
+	width: 1.5em;
+	border-radius: 0 0.1em 0.1em 0;
+	background-color: currentColor;
+	transform: rotate(90deg);
+	left: -0.6em;
+	top: 0.6em;
+}
+
+.mi-up {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.3em;
+	width: 1.5em;
+	border-radius: 0 0.1em 0.1em 0;
+	background-color: currentColor;
+	transform: rotate(45deg);
+	margin-top: 0.7em;
+	margin-left: 0.7em;
+}
+.mi-up::before {
+	content: '';
+	position: absolute;
+	height: 0.3em;
+	width: 1.5em;
+	border-radius: 0 0.1em 0.1em 0;
+	background-color: currentColor;
+	transform: rotate(90deg);
+	left: -0.6em;
+	top: 0.6em;
+}
+
+.mi-right {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.3em;
+	width: 1.5em;
+	border-radius: 0 0.1em 0.1em 0;
+	background-color: currentColor;
+	transform: rotate(135deg);
+	margin-top: 0.8em;
+	margin-left: 0.5em;
+}
+.mi-right::before {
+	content: '';
+	position: absolute;
+	height: 0.3em;
+	width: 1.5em;
+	border-radius: 0 0.1em 0.1em 0;
+	background-color: currentColor;
+	transform: rotate(90deg);
+	left: -0.6em;
+	top: 0.6em;
+}
+
+.mi-down {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.3em;
+	width: 1.5em;
+	border-radius: 0 0.1em 0.1em 0;
+	background-color: currentColor;
+	transform: rotate(-135deg);
+	margin-top: 0.5em;
+}
+.mi-down::before {
+	content: '';
+	position: absolute;
+	height: 0.3em;
+	width: 1.5em;
+	border-radius: 0 0.1em 0.1em 0;
+	background-color: currentColor;
+	transform: rotate(90deg);
+	left: -0.6em;
+	top: 0.6em;
+}
+
+.mi-battery {
+	position: absolute;
+	transition: all 0.2s;
+	border: 0.2em solid;
+	border-color: currentColor;
+	height: 1em;
+	width: 2.5em;
+	border-radius: 0.2em;
+	margin-left: -0.3em;
+}
+.mi-battery::before {
+	content: '';
+	position: absolute;
+	height: 0.6em;
+	width: 0.1em;
+	border: 0.2em solid;
+	border-color: currentColor currentColor currentColor transparent;
+	right: -0.5em;
+	border-radius: 0.2em;
+}
+.mi-battery::after {
+	content: '';
+	position: absolute;
+	background-color: currentColor;
+	height: 0.8em;
+	top: 0.1em;
+	left: 0.1em;
+}
+.mi-battery.low::after {
+	width: 0.5em;
+}
+.mi-battery.mid::after {
+	width: 1.2em;
+}
+.mi-battery.full::after {
+	width: 2.3em;
+}
+
+.mi-bookmark {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2em;
+	height: 2em;
+	background-color: currentColor;
+	border-radius: 0.3em 0.3em 0 0;
+}
+.mi-bookmark::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 0.8em solid;
+	border-left-width: 1em;
+	border-color: transparent transparent transparent currentColor;
+	top: 1.2em;
+	left: 0;
+}
+.mi-bookmark::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 0.8em solid;
+	border-right-width: 1em;
+	border-color: transparent currentColor transparent transparent;
+	top: 1.2em;
+	right: 0;
+}
+
+.mi-calculator {
+	position: absolute;
+	transition: all 0.2s;
+	border: 2px solid currentColor;
+	border-radius: 0.2em;
+	width: 2em;
+	height: 3em;
+	background-color: currentColor;
+}
+.mi-calculator::before {
+	content: '';
+	position: absolute;
+	background-color: #FFF;
+	width: 1.6em;
+	height: 0.8em;
+	left: 0.2em;
+	top: 0.1em;
+}
+.mi-calculator::after {
+	content: '';
+	position: absolute;
+	background-color: #FFF;
+	width: 0.4em;
+	height: 0.4em;
+	left: 0.2em;
+	top: 1.2em;
+	box-shadow: 
+		0.6em 0 0 0 #FFF,
+		1.2em 0 0 0 #FFF,
+		0 0.6em 0 0 #FFF,
+		0.6em 0.6em 0 0 #FFF,
+		1.2em 0.6em 0 0 #FFF,
+		1.2em 0.8em 0 0 #FFF,
+		0 1.2em 0 0 #FFF,
+		0.6em 1.2em 0 0 #FFF,
+		1.2em 1.2em 0 0 #FFF;
+}
+.mi-calculator.empty {
+	background-color: transparent;
+}
+.mi-calculator.empty::before {
+	background-color: currentColor;
+}
+.mi-calculator.empty::after {
+	background-color: currentColor;
+	box-shadow: 
+		0.6em 0 0 0,
+		1.2em 0 0 0,
+		0 0.6em 0 0,
+		0.6em 0.6em 0 0,
+		1.2em 0.6em 0 0,
+		1.2em 0.8em 0 0,
+		0 1.2em 0 0,
+		0.6em 1.2em 0 0,
+		1.2em 1.2em 0 0;
+}
+
+.mi-stats {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2.5em;
+	height: 2em;
+	border: 0.3em solid;
+	border-color: transparent transparent currentColor currentColor;
+	margin-left: -0.5em;
+}
+.mi-stats::before {
+	content: '';
+	position: absolute;
+	background-color: currentColor;
+	height: 1em;
+	width: 0.4em;
+	left: 0.1em;
+	bottom: 0.1em;
+	box-shadow:
+		0.5em 0 0 0,
+		0.5em -0.7em 0 0,
+		1em 0 0 0,
+		1em -0.4em 0 0,
+		1.5em 0 0 0,
+		1.5em -1em 0 0,
+		2em 0 0 0,
+		2em -0.3em 0 0;
+}
+
+.mi-check {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.3em;
+	width: 1.5em;
+	border-radius: 0 0.1em 0.1em 0;
+	background-color: currentColor;
+	transform: rotate(45deg);
+	margin-top: 1.3em;
+	margin-left: -0.5em;
+}
+.mi-check::before {
+	content: '';
+	position: absolute;
+	height: 0.3em;
+	width: 2em;
+	background-color: currentColor;
+	transform: rotate(90deg);
+	left: 0.4em;
+	top: -0.9em;
+}
+
+.mi-clipboard {
+	position: absolute;
+	transition: all 0.2s;
+	border: 2px solid currentColor;
+	border-radius: 0.4em;
+	width: 2em;
+	height: 3em;
+	background-color: currentColor;
+}
+.mi-clipboard::before {
+	content: '';
+	position: absolute;
+	background-color: #FFF;
+	width: 0.4em;
+	height: 0.4em;
+	border-radius: 100%;
+	border: 0.2em solid currentColor;
+	top: -0.7em;
+	left: 0.6em;
+}
+.mi-clipboard::after {
+	content: '';
+	position: absolute;
+	background-color: #FFF;
+	width: 1.6em;
+	height: 0.2em;
+	top: 0.2em;
+	left: 0.2em
+}
+.mi-clipboard.empty {
+	background-color: transparent;
+}
+.mi-clipboard.empty::after {
+	background-color: currentColor;
+}
+
+.mi-comment {
+	position: absolute;
+	transition: all 0.2s;
+	background-color: currentColor;
+	border: 0.2em solid currentColor;
+	width: 3em;
+	height: 2em;
+	border-radius: 100%;
+	margin-left: -0.5em;
+}
+.mi-comment::before {
+	content: '';
+	position: absolute;
+	border-radius: 100%;
+	width: 1em;
+	height: 1em;
+	border: solid;
+	border-width: 1em 1em 1em 0;
+	border-color: transparent transparent currentColor transparent;
+	left: -2.2em;
+	top: -1.4em;
+	transform: rotate(-80deg);
+	transform-origin: right;
+}
+.mi-comment::after {
+	content: '';
+	position: absolute;
+	background-color: #FFF;
+	border-radius: 100%;
+	width: 0.4em;
+	height: 0.4em;
+	left: 0.6em;
+	top: 0.8em;
+	box-shadow:
+		0.7em 0 0 0 #FFF,
+		1.4em 0 0 0 #FFF;
+}
+
+.mi-location {
+	position: absolute;
+	transition: all 0.2s;
+	background-color: currentColor;
+	width: 2em;
+	height: 2em;
+	border-radius: 100%;
+	margin-top: -0.5em;
+}
+.mi-location::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width: 2em 1em 0 1em;
+	border-color: currentColor transparent transparent transparent;
+	left: 0;
+	top: 1.2em;
+}
+.mi-location::after {
+	content: '';
+	position: absolute;
+	background-color: #FFF;
+	width: 0.8em;
+	height: 0.8em;
+	border-radius: 100%;
+	top: 0.6em;
+	left: 0.6em;
+}
+
+.mi-link {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0.5em;
+	height: 0.5em;
+	border: 0.2em solid currentColor;
+	border-radius: 100%;
+	box-shadow: 
+		1.1em 1.5em 0 0,
+		2.1em 0 0 0;
+		margin-left: -0.5em;
+}
+.mi-link::before {
+	content: '';
+	position: absolute;
+	width: 1.2em;
+	height: 1.2em;
+	transform: rotate(45deg);
+	top: -0.2em;
+	left: 0.5em;
+	border: 0.2em solid currentColor;
+	border-color: transparent currentColor currentColor transparent;
+}
+.mi-link::after {
+	content: '';
+	position: absolute;
+	background-color: #FFF;
+	width: 0.5em;
+	height: 0.5em;
+	border-radius: 100%;
+	left: 2.1em;
+	box-shadow: -1em 1.5em 0 0 #FFF;
+}
+
+.mi-search {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2em;
+	height: 2em;
+	border: 0.2em solid currentColor;
+	border-radius: 100%;
+	margin-top: -0.8em;
+	margin-left: -0.5em;
+}
+.mi-search::before {
+	content: '';
+	position: absolute;
+	background-color: currentColor;
+	width: 0.2em;
+	height: 1.3em;
+	top: 2em;
+	left: 2em;
+	transform-origin: left;
+	transform: rotate(-35deg);
+}
+
+.mi-heart {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0;
+	height: 0;
+	border: 0.5em solid;
+	border-color: currentColor currentColor;
+	border-radius: 100%;
+	transform: rotate(-45deg);
+	box-shadow: 0.7em 0.7em 0 0;
+}
+.mi-heart::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width: 1.5em 1em 0 1em;
+	border-color: currentColor transparent transparent transparent;
+	transform: rotate(45deg);
+	left: -1.2em;
+	top: 0.1em;
+}
+
+.mi-music {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0.2em;
+	height: 2em;
+	background-color: currentColor;
+	margin-left: 0.8em;
+}
+.mi-music::before {
+	content: '';
+	position: absolute;
+	width: 1.2em;
+	height: 0.8em;
+	border-radius: 100%;
+	background-color: currentColor;
+	left: -1em;
+	bottom: -0.2em;
+}
+.mi-music::after {
+	content: '';
+	position: absolute;
+	width: 0.9em;
+	height: 0.8em;
+	border: solid;
+	border-width: 0.6em 0 0 0.6em;
+	border-color: currentColor transparent transparent transparent;
+	border-top-right-radius: 100%;
+	top: -0.3em;
+	left: 0em;
+}
+
+.mi-cloud {
+	position: absolute;
+	transition: all 0.2s;
+	width: 1em;
+	height: 1em;
+	background-color: currentColor;
+	border-radius: 100%;
+	box-shadow: 
+		0.6em -0.5em 0 0,
+		1.4em -0.8em 0 0,
+		1.7em -0.4em 0 0,
+		2em 0 0 0;
+	margin-left: -0.5em;
+	margin-top: 1em;
+}
+.mi-cloud::before {
+	content: '';
+	position: absolute;
+	width: 2.2em;
+	height: 1em;
+	background-color: currentColor;
+	bottom: 0;
+	left: 0.4em;
+}
+
+.mi-cart {
+	position: absolute;
+	transition: all 0.2s;
+	width: 1.5em;
+	height: 0.2em;
+	border: solid;
+	border-color: currentColor transparent currentColor currentColor;
+	border-width: 1em 0 0.2em 0.2em;
+	transform: skewX(10deg);
+	margin-top: 0.2em;
+	margin-left: 0.5em;
+}
+.mi-cart::before {
+	content: '';
+	position: absolute;
+	height: 0.5em;
+	width: 0.5em;
+	background-color: currentColor;
+	border-radius: 100%;
+	bottom: -0.8em;
+	left: -0.2em;
+	transform: skewX(-10deg);
+	box-shadow: 1em 0 0 0;
+}
+.mi-cart::after {
+	content: '';
+	position: absolute;
+	height: 0.4em;
+	width: 0.3em;
+	border: solid;
+	border-width: 0.2em 0.2em 0 0 ;
+	border-color: currentColor currentColor transparent transparent;
+	left: -0.5em;
+	top: -1.5em;
+}
+
+.mi-sign {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2em;
+	height: 1em;
+	background-color: currentColor;
+}
+.mi-sign::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 0.5em solid;
+	border-color: transparent transparent transparent currentColor;
+	right: -1em;
+}
+.mi-sign::after {
+	content: '';
+	position: absolute;
+	width: 0.2em;
+	height: 2.5em;
+	background-color: currentColor;
+	top: -0.2em;
+}
+
+.mi-download {
+	position: absolute;
+	transition: all 0.2s;
+	width: 1.4em;
+	height: 0.7em;
+	border: 0.2em solid;
+	border-top-width: 0;
+	border-color: transparent currentColor currentColor currentColor;
+	margin-top: 1em;
+}
+.mi-download::before {
+	content: '';
+	position: absolute;
+	width: 0.4em;
+	height: 1em;
+	background-color: currentColor;
+	left: 0.5em;
+	top: -1.2em;
+}
+.mi-download::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 0.5em solid;
+	border-color: currentColor transparent transparent transparent;
+	left: 0.2em;
+	top: -0.2em;
+}
+
+.mi-upload {
+	position: absolute;
+	transition: all 0.2s;
+	width: 1.4em;
+	height: 0.7em;
+	border: 0.2em solid;
+	border-top-width: 0;
+	border-color: transparent currentColor currentColor currentColor;
+	transform: rotate(180deg);
+}
+.mi-upload::before {
+	content: '';
+	position: absolute;
+	width: 0.4em;
+	height: 1em;
+	background-color: currentColor;
+	left: 0.5em;
+	top: -1.2em;
+}
+.mi-upload::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 0.5em solid;
+	border-color: currentColor transparent transparent transparent;
+	left: 0.2em;
+	top: -0.2em;
+}
+
+.mi-settings {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.5em;
+	width: 0.5em;
+	border: 1em solid currentColor;
+	border-radius: 100%;
+}
+.mi-settings::before {
+	content: '';
+	position: absolute;
+	height: 0.5em;
+	width: 0.5em;
+	background-color: currentColor;
+	border-radius: 50%;
+	top: -1.3em;
+	left: 0em;
+	box-shadow:
+		1em 0.4em 0 0,
+		1.3em 1.3em 0 0,
+		1em 2.2em 0 0,
+		0 2.6em 0 0,
+		-1em 2.2em 0 0,
+		-1.3em 1.3em 0 0,
+		-1em 0.4em 0 0;
+}
+
+.mi-glass {
+	position: absolute;
+	transition: all 0.2s;
+	background-color: currentColor;
+	width: 1.3em;
+	height: 1.5em;
+	border-radius: 0 0 50% 50%;
+	border: 0.2em solid currentColor;
+	margin-left: 0.3em;
+}
+.mi-glass::before {
+	content: '';
+	position: absolute;
+	width: 0.3em;
+	height: 0.8em;
+	background-color: currentColor;
+	bottom: -0.9em;
+	left: 0.5em;
+}
+.mi-glass::after {
+	content: '';
+	position: absolute;
+	height: 0.1em;
+	width: 0.7em;
+	background-color: currentColor;
+	border: 0.2em solid currentColor;
+	bottom: -1.3em;
+	border-radius: 50% 50% 0 0;
+	left: 0.1em;
+}
+.mi-glass.empty, .mi-glass.empty::after {
+	background-color: transparent;
+}
+
+.mi-pie {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-radius: 100%;
+	border-color: transparent currentColor currentColor;
+    border-width: 1.5em;
+    transform: rotate(45deg);
+    margin-left: -0.3em;
+}
+.mi-pie::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-radius: 100%;
+	border-color: currentColor transparent transparent transparent;
+    border-width: 1.4em;
+    left: -1.4em;
+    top: -1.5em;
+}
+
+.mi-trash {
+	position: absolute;
+	transition: all 0.2s;
+	height: 2em;
+	width: 1.6em;
+	border: 0.2em solid currentColor;
+	border-radius: 0.1em;
+}
+.mi-trash::before {
+	content: '';
+	position: absolute;
+	background-color: currentColor;
+	width: 0.2em;
+	height: 1em;
+	top: 0.6em;
+	left: 0.3em;
+	box-shadow:
+		0.4em 0 0 0,
+		0.8em 0 0 0;
+}
+.mi-trash::after {
+	content: '';
+	position: absolute;
+	height: 0.1em;
+	width: 0.8em;
+	border: 0.2em solid;
+	border-color: currentColor currentColor transparent currentColor;
+	border-radius: 0.2em;
+	left: 0.2em;
+	top: -0.5em;
+}
+
+.mi-eye {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0.4em;
+	height: 0.4em;
+	border: 0.7em solid currentColor;
+	border-radius: 100%;
+	margin-left: 0.3em;
+}
+.mi-eye::before {
+	content: '';
+	position: absolute;
+	width: 6em;
+	height: 6em;
+	border: 0.2em solid;
+	border-color: currentColor transparent transparent transparent;
+	border-radius: 100%;
+	top: -0.8em;
+	left: -3em;
+}
+.mi-eye::after {
+	content: '';
+	position: absolute;
+	width: 6em;
+	height: 6em;
+	border: 0.2em solid;
+	border-color: transparent transparent currentColor transparent;
+	border-radius: 100%;
+	bottom: -0.8em;
+	left: -3em;
+}
+
+.mi-hierarchy {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.4em;
+	width: 0.8em;
+	border: 0.2em solid currentColor;
+	border-radius: 0.2em;
+	box-shadow: 
+		-1.1em 1.5em 0 0,
+		1.1em 1.5em 0 0;
+	margin-left: 0.5em;
+}
+.mi-hierarchy::before {
+	content: '';
+	position: absolute;
+	width: 0.2em;
+	height: 0.5em;
+	background-color: currentColor;
+	left: 0.3em;
+	top: 0.5em;
+}
+.mi-hierarchy::after {
+	content: '';
+	position: absolute;
+	width: 2em;
+	height: 0.3em;
+	border: 0.2em solid;
+	border-radius: 0.2em;
+	border-color: currentColor currentColor transparent;
+	left: -0.8em;
+	top: 0.9em;
+}
+
+.mi-bell {
+	position: absolute;
+	transition: all 0.2s;
+	width: 1.2em;
+	height: 1.4em;
+	border: 0.2em solid currentColor;
+	border-radius: 100% 100% 0 0;
+	margin-left: 0.3em;
+}
+.mi-bell::before {
+	content: '';
+	position: absolute;
+	background-color: currentColor;
+	width: 2em;
+	height: 0.2em;
+	bottom:-0.2em;
+	left: -0.4em;
+}
+.mi-bell::after {
+	content: '';
+	position: absolute;
+	height: 0.4em;
+	width: 0.4em;
+	background-color: currentColor;
+	border-radius: 100%;
+	bottom: -0.7em;
+	left: 0.4em;
+	box-shadow: 0 -2.1em 0 0;
+}
+
+.mi-connection {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.6em;
+	width: 0.6em;
+	background-color: currentColor;
+	border-radius: 100%;
+	margin-left: 0.7em;
+	margin-top: 1em;
+}
+.mi-connection::before {
+	content: '';
+	position: absolute;
+	height: 1.6em;
+	width: 1.6em;
+	border: 0.3em solid;
+	border-color: currentColor transparent transparent;
+	border-radius: 100%;
+	left: -0.8em;
+	top: -0.6em;
+}
+.mi-connection::after {
+	content: '';
+	position: absolute;
+	height: 2.8em;
+	width: 2.8em;
+	border: 0.3em solid;
+	border-color: currentColor transparent transparent;
+	border-radius: 100%;
+	left: -1.4em;
+	top: -1.2em;
+}
+
+.mi-save {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.5em;
+	width: 1.3em;
+	border: solid currentColor;
+	border-width: 1em 0.4em 0.2em;
+}
+.mi-save::before {
+	content: '';
+	position: absolute;
+	width: 1.7em;
+	height: 0;
+	border: solid;
+	border-color: transparent transparent currentColor transparent;
+	border-width: 0 0.4em 0.4em 0;
+	top: -1.4em;
+	left:  -0.4em;
+}
+
+.mi-coffee {
+	position: absolute;
+	transition: all 0.2s;
+	height: 1.5em;
+	width: 2em;
+	border: 0.2em solid currentColor;
+	border-radius: 0 0 100% 100%;
+}
+.mi-coffee::before {
+	content: '';
+	position: absolute;
+	height: 0.5em;
+	width: 0.4em;
+	border: 0.2em solid;
+	border-color: currentColor currentColor currentColor transparent;
+	border-radius: 0 100% 100% 0;
+	right: -0.8em;
+}
+.mi-coffee::after {
+	content: '';
+	position: absolute;
+	width: 2.6em;
+	height: 0.2em;
+	border: solid;
+	border-radius: 100%;
+	border-width: 0 0 0.2em 0;
+	border-color: transparent transparent currentColor transparent;
+	left: -0.3em;
+	bottom: -0.5em;
+}
+
+.mi-photo {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2.5em;
+	height: 1.5em;
+	border: 0.2em solid currentColor;
+	border-radius: 0.2em;
+	margin-left: -0.5em;
+}
+.mi-photo::before {
+	content: '';
+	position: absolute;
+	width: 0.5em;
+	height: 0.5em;
+	border: 0.2em solid currentColor;
+	border-radius: 100%;
+	left: 0.4em;
+	top: 0.4em;
+}
+.mi-photo::after {
+	content: '';
+	position: absolute;
+	height: 0.1em;
+	width: 0.3em;
+	border: 0.2em solid currentColor;
+	right: 0.2em;
+	top: 0.1em;
+	border-radius: 0.2em;
+	box-shadow: -1.5em -0.6em 0 0;
+}
+
+.mi-folder {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2.5em;
+	height: 1.6em;
+	border: solid currentColor;
+	border-width: 0 0.2em 0.2em;
+	border-radius: 0.2em;
+	margin-left: -0.5em;
+}
+.mi-folder::before {
+	content: '';
+	position: absolute;
+	border: 0.2em solid;
+	border-color: currentColor transparent transparent currentColor;
+	width: 0.6em;
+	height: 0.3em;
+	border-radius: 0.2em;
+	left: -0.2em;
+	top: -0.3em;
+}
+.mi-folder::after {
+	content: '';
+	position: absolute;
+	width: 1.6em;
+	height: 0.3em;
+	border: solid;
+	border-width: 0 0 0.2em 0.3em;
+	border-color: transparent transparent currentColor currentColor;
+	border-radius: 0.2em;
+	transform: skewX(30deg);
+	top: -0.3em;
+	left: 0.7em;
+}
+
+.mi-film {
+	position: absolute;
+	transition: all 0.2s;
+	width: 1em;
+	height: 0.8em;
+	border: solid currentColor;
+	border-width: 0.5em 0.2em;
+	margin-left: 0.5em;
+}
+.mi-film::before {
+	content: '';
+	position: absolute;
+	width: 0.2em;
+	height: 2.4em;
+	background-color: currentColor;
+	top: -0.8em;
+	left: -0.9em;
+	box-shadow:
+		0.4em 0 0 0,
+		0.6em 0 0 0,
+		2em 0 0 0,
+		2.2em 0 0 0,
+		2.6em 0 0 0;
+}
+.mi-film::after {
+	content: '';
+	position: absolute;
+	background-color: currentColor;
+	height: 0.2em;
+	width: 0.2em;
+	left: -0.7em;
+	top: -0.7em;
+	box-shadow:
+		0 0.4em 0 0,
+		0 0.8em 0 0,
+		0 1.2em 0 0,
+		0 1.6em 0 0,
+		0 2em 0 0,
+		2.2em 0 0 0,
+		2.2em 0.4em 0 0,
+		2.2em 0.8em 0 0,
+		2.2em 1.2em 0 0,
+		2.2em 1.6em 0 0,
+		2.2em 2em 0 0;
+}
+
+.mi-star {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width: 1.5em 2em 0 2em;
+	border-color: currentColor transparent transparent;
+	margin-left: -1em;
+}
+.mi-star::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width: 2em 1.5em 2em 0;
+	border-color: transparent currentColor transparent transparent;
+	left: -0.8em;
+	top: -2.6em;
+	transform-origin: left;
+	transform: rotate(-18deg);
+}
+.mi-star::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width: 2em 0 2em 1.5em;
+	border-color: transparent transparent transparent currentColor;
+	left: -0.6em;
+	top: -3.1em;
+	transform-origin: left;
+	transform: rotate(18deg);
+}
+
+.mi-lightbulb {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2.5em;
+	height: 2.5em;
+	background-color: currentColor;
+	border-radius: 100%;
+	margin-top: -0.8em;
+	margin-left: -0.3em;
+}
+.mi-lightbulb::before {
+	content: '';
+	position: absolute;
+	width: 1.5em;
+	height: 0.5em;
+	background-color: currentColor;
+	left: 0.5em;
+	bottom: -0.1em;
+}
+.mi-lightbulb::after {
+	content: '';
+	position: absolute;
+	width: 0.7em;
+	height: 0.2em;
+	left: 0.5em;
+	bottom: -1.6em;
+	border: solid;
+	border-width: 0.6em 0.4em;
+	border-color: currentColor transparent transparent;
+}
+
+.mi-play {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width:  1em 1.8em;
+	border-color: transparent transparent transparent currentColor;
+}
+
+.mi-pause {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0.5em;
+	height: 2em;
+	border-left: 0.6em solid currentColor;
+	border-right: 0.6em solid currentColor;
+}
+
+.mi-stop {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2em;
+	height: 2em;
+	background-color: currentColor;
+}
+
+.mi-fast-forward {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width:  0.8em 1.4em;
+	border-color: transparent transparent transparent currentColor;
+	margin-top: 0.2em;
+}
+.mi-fast-forward::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width:  0.8em 1.4em;
+	border-color: transparent transparent transparent currentColor;
+	left: -0.2em;
+	top: -0.8em;
+}
+
+.mi-fast-backward {
+	position: absolute;
+	transition: all 0.2s;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width:  0.8em 1.4em;
+	border-color: transparent currentColor transparent transparent;
+	margin-top: 0.2em;
+	margin-left: -1.6em;
+}
+.mi-fast-backward::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid;
+	border-width:  0.8em 1.4em;
+	border-color: transparent currentColor transparent transparent;
+	left: -0.2em;
+	top: -0.8em;
+}
+
+.mi-video {
+	position: absolute;
+	transition: all 0.2s;
+	width: 2em;
+	height: 1.6em;
+	border: 0.2em solid currentColor;
+	border-radius: 0.2em;
+}
+.mi-video::before {
+	content: '';
+	position: absolute;
+	height: 0.2em;
+	width: 0;
+	border: 0.6em solid;
+	border-color: transparent currentColor transparent transparent;
+	right: -0.7em;
+	top: 0.1em;
+}
+.mi-video::after {
+	content: '';
+	position: absolute;
+	width: 0.4em;
+	height: 0.4em;
+	border: 0.2em solid currentColor;
+	border-radius: 100%;
+	left: 0.6em;
+	top: 0.4em;
+}
+
+.mi-cutlery {
+	position: absolute;
+	transition: all 0.2s;
+	height: 0.8em;
+	width: 0.2em;
+	background-color: currentColor;
+	box-shadow: 
+		0.3em 0 currentColor,
+		0.6em 0 currentColor,
+		0.2em 0.9em currentColor,
+		0.4em 0.9em currentColor,
+		0.2em 1.7em currentColor,
+		0.4em 1.7em currentColor,
+		1.6em 0.5em currentColor,
+		1.4em 0.9em currentColor,
+		1.6em 0.9em currentColor,
+		1.4em 1.7em currentColor,
+		1.6em 1.7em currentColor;
+}
+.mi-cutlery::before {
+	content: '';
+	position: absolute;
+	width: 0.8em;
+	height: 0.4em;
+	background-color: currentColor;
+	border-radius: 0 0 100% 100%;
+	top: 0.6em;
+	left: 0em;
+}
+.mi-cutlery::after {
+	content: '';
+	position: absolute;
+	width: 0.6em;
+	height: 1.4em;
+	background-color: currentColor;
+	left: 1.2em;
+	border-radius: 50% 25% 0 30%;
+}

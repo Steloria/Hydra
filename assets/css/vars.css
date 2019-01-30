@@ -1,0 +1,15 @@
+/* Color properties */
+
+:root {
+  --title:   	#FFF;
+  --text:   	#ecf0f1;
+  --color-link: #ecf0f1;
+
+  --color-border:   #2e3b48;
+  --color-bg:       #34495e;
+  --color-bg-dark:  #2c3e50;
+  --color-accent:   #2c3e50;
+  --color-error:    #e74c3c;
+  --color-validate: #27ae60;
+  --color-shadow:   #1d2c3b;
+}

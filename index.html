@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>ShematisR</title>
+
+    <link rel="stylesheet" href="assets/css/vars.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/mi-icons.css">
+  </head>
+  <body>
+    <div id="home">
+      <nav>
+        <header>
+        </header>
+        <ul>
+          <li>
+            <button type="button" id="button-clipboard" class="nav-button" v-on:click="displayed = 'home'">
+              <i class="mi-home"></i>
+            </button>
+            <button type="button" id="button-clipboard" class="nav-button" v-on:click="displayed = 'create'">
+              <i class="mi-plus"></i>
+            </button>
+          </li>
+        </ul>
+        <footer>
+        </footer>
+      </nav>
+
+      <main>
+        <div class="home" v-if="displayed == 'home'">
+          Home
+        </div>
+        <div class="create" v-if="displayed == 'create'">
+          <div class="form">
+            <input type="text" placeholder="Database Name" v-model="model.name">
+            <button v-on:click="addTable"><i class="mi-plus"></i> Add Table</button>
+            <hr>
+            <div v-if="selectedTable != null">
+              <input type="text" placeholder="Table Name" v-model="model.tables[selectedTable].name">
+              <button v-on:click="addLine"><i class="mi-plus"></i> Add Line</button>
+              <div v-for="line in model.tables[selectedTable].lines" class="lines">
+                <input type="text" placeholder="Line Name" v-model="line.name">
+                <button>Edit</button>
+              </div>
+            </div>
+          </div>
+          <div class="database" v-on:mousemove="moveItem">
+            <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.posY + 'px', left: item.posX + 'px'}">
+              <h3>{{ item.name }}</h3>
+              <div v-for="line in item.lines" class="lines">{{ line.name }}</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      require('./renderer.js');
+    </script>
+  </body>
+</html>

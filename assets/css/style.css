@@ -1,0 +1,134 @@
+html {
+  height: 100%;
+}  
+body {
+	background-color: var(--color-bg);
+	color: var(--text);
+	font-family: sans-serif;
+	margin: 0;
+	height: 100%;
+}
+::placeholder {
+  color: var(--text);
+  opacity: 1;
+}
+body > div {
+	display: flex;
+}
+
+nav {
+	width: 70px;
+  	overflow-x: hidden;
+  	overflow-y: auto;
+  	background-color: var(--color-bg-dark);
+  	padding: 10px;
+  	box-shadow: 0 0 10px 2px var(--color-shadow);
+  	text-align: center;
+}
+nav img {
+	width: 50px;
+}
+nav ul {
+	list-style: none;
+	padding: 0;
+}
+nav li {
+	margin-bottom: 10px;
+}
+nav button {
+	position: relative;
+	color: var(--color-bg);
+	font-size: 8px;
+	border: none;
+	background-color: transparent;
+	height: 20px;
+	height: 50px;
+	width: 50px;
+	background-color: var(--text);
+	border-radius: 50%;
+	cursor: pointer;
+	outline: none;
+	margin-bottom: 10px;
+}
+nav button i.mi-home {
+	top: 14px;
+	left: 16px;
+}
+nav button i.mi-plus {
+	top: 18px;
+	left: 14px;
+	font-size: 11px;
+}
+
+main {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  overflow: scroll;
+  box-sizing: border-box;
+}
+.home {
+	padding: 30px;
+}
+
+/* Form */
+input[type="text"], button {
+	width: 100%;
+	background-color: var(--color-bg-dark);
+	border: 0;
+	border-radius: 5px;
+	padding: 15px 20px;
+	box-sizing: border-box;
+	color: #FFF;
+	font-size: 16px;
+	outline: none;
+	margin-bottom: 10px;
+}
+button {
+	background-color: var(--color-validate);
+	color: #FFF;
+	cursor: pointer;
+}
+
+/* Models */
+.create {
+	display: flex;
+	height: 100%;
+}
+.create > div {
+	padding: 30px;
+}
+.create .form {
+	flex: 1;
+	box-shadow: 2px 0 10px 0 #2e3b48;
+	z-index: 1;
+}
+.create .database {
+	flex: 3;
+	background-color: var(--color-bg-dark);
+	position: relative;
+	overflow: hidden;
+}
+.create button i {
+	font-size: 8px;
+    transform: translate3d(-30px, 4px, 0);
+}
+.create hr {
+	border-width: 0 0 1px;
+	border-color: var(--color-bg-dark);
+}
+
+/* Database Schema */
+.db-item {
+	position: absolute;
+	background-color: var(--color-bg);
+	border-radius: 5px;
+	padding: 10px;
+	width: 250px;
+	box-shadow: 0 0 10px 2px var(--color-border);
+}
+.db-item h3 {
+	text-align: center;
+	margin: 5px;
+}
