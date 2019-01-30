@@ -118,6 +118,20 @@ button {
 	border-width: 0 0 1px;
 	border-color: var(--color-bg-dark);
 }
+.create .lines {
+	display: flex;
+}
+.create .lines button {
+	width: 50px;
+    margin-left: 10px;
+    position: relative;
+}
+.create .lines button i {
+	top: 14px;
+    right: 21px;
+    transform: rotate(30deg);
+    font-size: 7px;
+}
 
 /* Database Schema */
 .db-item {
@@ -127,8 +141,21 @@ button {
 	padding: 10px;
 	width: 250px;
 	box-shadow: 0 0 10px 2px var(--color-border);
+	cursor: pointer;
 }
 .db-item h3 {
 	text-align: center;
 	margin: 5px;
+}
+.db-item h3 button {
+	all: initial;
+	color: #FFF;
+	position: relative;
+	cursor: pointer;
+}
+.db-item h3 button i {
+	top: -15px;
+    left: 10px;
+    font-size: 6px;
+    transform: rotate(30deg);
 }

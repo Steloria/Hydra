@@ -38,16 +38,16 @@
             <hr>
             <div v-if="selectedTable != null">
               <input type="text" placeholder="Table Name" v-model="model.tables[selectedTable].name">
-              <button v-on:click="addLine"><i class="mi-plus"></i> Add Line</button>
+              <button class="m-b-20" v-on:click="addLine"><i class="mi-plus"></i> Add Line</button>
               <div v-for="line in model.tables[selectedTable].lines" class="lines">
                 <input type="text" placeholder="Line Name" v-model="line.name">
-                <button>Edit</button>
+                <button><i class="mi-pen"></i></button>
               </div>
             </div>
           </div>
           <div class="database" v-on:mousemove="moveItem">
             <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.posY + 'px', left: item.posX + 'px'}">
-              <h3>{{ item.name }}</h3>
+              <h3>{{ item.name }} <button v-on:click="selectedTable = index"><i class="mi-pen"></i></button></h3>
               <div v-for="line in item.lines" class="lines">{{ line.name }}</div>
             </div>
           </div>
