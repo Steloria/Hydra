@@ -17,3 +17,9 @@
 .m-b-20 {
   margin-bottom: 20px;
 }
+.flex {
+  display: flex;
+}
+.flex > *:first-child {
+  margin-right: 10px;
+}

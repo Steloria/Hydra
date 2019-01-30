@@ -32,12 +32,14 @@ window.onload = function() {
             'name': 'id',
             'type': 'Int',
             'unique': 'true',
-            'size': null,
-            'default': null
+            'required': 'true',
+            'size': '',
+            'default': ''
           }
         ],
         name: "New Table"
-      }
+      },
+      lineShown: null
     },
     methods: {
       addTable: function() {
@@ -49,8 +51,9 @@ window.onload = function() {
             'name': 'New Line',
             'type': 'Int',
             'unique': 'false',
-            'size': null,
-            'default': null
+            'required': 'true',
+            'size': '',
+            'default': ''
           });
       },
       duplicate: function(elem) {
@@ -78,6 +81,12 @@ window.onload = function() {
         this.initialItemPos.x = 0;
         this.initialItemPos.y = 0;
         this.movingItem = null;
+      },
+      showLine: function(i) {
+        this.lineShown = this.lineShown != i ? i : null;
+      },
+      removeLine: function(i) {
+        this.model.tables[this.selectedTable].lines.splice(i, 1);
       }
     }
   })

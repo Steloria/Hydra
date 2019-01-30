@@ -9,6 +9,7 @@ function createWindow () {
     width: 1280,
     minWidth: 1000,
     height: 840,
+    minHeight: 600,
     title: app.getName(),
     icon: path.join(__dirname, 'assets/icon/png/64x64.png')
   });

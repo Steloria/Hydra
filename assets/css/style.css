@@ -73,22 +73,29 @@ main {
 }
 
 /* Form */
-input[type="text"], button {
+input[type="text"], button, select {
 	width: 100%;
 	background-color: var(--color-bg-dark);
 	border: 0;
 	border-radius: 5px;
 	padding: 15px 20px;
+	min-height: 46px;
 	box-sizing: border-box;
 	color: #FFF;
 	font-size: 16px;
 	outline: none;
 	margin-bottom: 10px;
 }
+select {
+	height: 46px;
+}
 button {
 	background-color: var(--color-validate);
 	color: #FFF;
 	cursor: pointer;
+}
+button.remove {
+	background-color: var(--color-error);
 }
 
 /* Models */
@@ -103,6 +110,8 @@ button {
 	flex: 1;
 	box-shadow: 2px 0 10px 0 #2e3b48;
 	z-index: 1;
+	height: 100vh;
+	overflow: scroll;
 }
 .create .database {
 	flex: 3;
@@ -118,19 +127,33 @@ button {
 	border-width: 0 0 1px;
 	border-color: var(--color-bg-dark);
 }
-.create .lines {
+.create .lines .content {
 	display: flex;
+	align-items: center;
+	position: relative;
 }
-.create .lines button {
+.create .lines .content button {
 	width: 50px;
     margin-left: 10px;
     position: relative;
+    height: 48px;
 }
-.create .lines button i {
+.create .lines .content button i.mi-pen {
 	top: 14px;
     right: 21px;
     transform: rotate(30deg);
     font-size: 7px;
+}
+.create .lines .line-update {
+	height: 0;
+	overflow: hidden;
+}
+.create .lines .line-update.expanded {
+	height: initial;
+    padding: 20px 10px 10px;
+    background: #1d2c3b;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 /* Database Schema */

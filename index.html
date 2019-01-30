@@ -34,21 +34,52 @@
         <div class="create" v-if="displayed == 'create'">
           <div class="form">
             <input type="text" placeholder="Database Name" v-model="model.name">
-            <button v-on:click="addTable"><i class="mi-plus"></i> Add Table</button>
+            <div class="flex">
+              <button v-on:click="addTable"><i class="mi-plus"></i>Table</button>
+              <button><i class="mi-plus"></i>Relation</button>
+            </div>
             <hr>
             <div v-if="selectedTable != null">
               <input type="text" placeholder="Table Name" v-model="model.tables[selectedTable].name">
               <button class="m-b-20" v-on:click="addLine"><i class="mi-plus"></i> Add Line</button>
-              <div v-for="line in model.tables[selectedTable].lines" class="lines">
-                <input type="text" placeholder="Line Name" v-model="line.name">
-                <button><i class="mi-pen"></i></button>
+              <div v-for="line, i in model.tables[selectedTable].lines" class="lines">
+                <div class="content">
+                  <input type="text" placeholder="Line Name" v-model="line.name">
+                  <button v-on:click="showLine(i)"><i class="mi-pen"></i></button>
+                </div>
+                <div class="line-update" v-bind:class="{'expanded': lineShown == i}">
+                  <select v-model="line.type">
+                    <option value="Int">Integer</option>
+                    <option value="String">String</option>
+                    <option value="Array">Array</option>
+                    <option value="Boolean">Boolean</option>
+                  </select>
+
+                  <p>Unique:</p>
+                  <select v-model="line.unique">
+                    <option value="false">False</option>
+                    <option value="true">True</option>
+                  </select>
+
+                  <p>Required:</p>
+                  <select v-model="line.required">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </select>
+
+                  <input type="text" placeholder="Size" v-model="line.size">
+
+                  <input type="text" placeholder="Default Value" v-model="line.default">
+
+                  <button class="remove" v-on:click="removeLine(i)">Remove</button>
+                </div>
               </div>
             </div>
           </div>
           <div class="database" v-on:mousemove="moveItem">
             <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.posY + 'px', left: item.posX + 'px'}">
               <h3>{{ item.name }} <button v-on:click="selectedTable = index"><i class="mi-pen"></i></button></h3>
-              <div v-for="line in item.lines" class="lines">{{ line.name }}</div>
+              <div v-for="line in item.lines" class="lines">{{ line.name }} ({{ line.type }}<span v-if="line.size != ''"> - {{ line.size }}</span>)</div>
             </div>
           </div>
         </div>
