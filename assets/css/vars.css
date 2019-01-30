@@ -13,3 +13,7 @@
   --color-validate: #27ae60;
   --color-shadow:   #1d2c3b;
 }
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
