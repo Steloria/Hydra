@@ -103,29 +103,14 @@ window.onload = function() {
         this.model.connexions.splice(i, 1);
         this.selectedConnexion = null;
       },
-      getPos: function(type, i) {
-        switch (type) {
-          case "x1":
-            console.log(this.model.connexions[i].from);
-            var linkedTable = this.findById(this.model.connexions[i].from);
-            return linkedTable.posX + 250;
-            break;
-          case "x2":
-            var linkedTable = this.findById(this.model.connexions[i].to);
-            return linkedTable.posX;
-            break;
-          case "y1":
-            var linkedTable = this.findById(this.model.connexions[i].from);
-            return linkedTable.posY + 20;
-            break;
-          case "y2":
-            var linkedTable = this.findById(this.model.connexions[i].to);
-            return linkedTable.posY + 20;
-            break;
-          default:
-            break;
-        }
-        return 0;
+      getPos: function(i) {
+        let linkedTableFrom = this.findById(this.model.connexions[i].from);
+        let linkedTableTo = this.findById(this.model.connexions[i].to);
+        let bezier = "M" + (linkedTableFrom.posX + 250) + "," + (linkedTableFrom.posY + 20) +
+          " Q" + (linkedTableFrom.posX + 280) + "," + (linkedTableFrom.posY + 20) +
+          " " + ((linkedTableTo.posX - 30 + linkedTableFrom.posX + 280) / 2) + "," + ((linkedTableTo.posY + 20 + linkedTableFrom.posY + 20) / 2) +
+          " T" + (linkedTableTo.posX) + "," + (linkedTableTo.posY + 20);
+        return bezier;
       },
       isComplete: function(i) {
         if (this.model.connexions[i].from != '' && this.model.connexions[i].to != '') {

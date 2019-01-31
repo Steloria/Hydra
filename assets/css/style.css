@@ -93,6 +93,7 @@ button {
 	background-color: var(--color-validate);
 	color: #FFF;
 	cursor: pointer;
+	position: relative;
 }
 button.remove {
 	background-color: var(--color-error);
@@ -127,9 +128,10 @@ button.remove {
     height: 100%;
     width: 100%;
 }
-.create .database svg line {
+.create .database svg path {
 	stroke: #000;
-	stroke-width: 2;
+	fill: none;
+	stroke-width: 3px;
 	cursor: pointer;
 }
 .create button i {
