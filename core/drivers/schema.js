@@ -39,4 +39,11 @@ module.exports = class Schema {
         return this;
     }
 
+    /**
+     * Must be overrided for each driver schema
+     */
+    export() {
+        throw new Error('Export function must be overrided by drivers')
+    }
+
 };

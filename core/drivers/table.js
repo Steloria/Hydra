@@ -19,7 +19,7 @@ module.exports = class Table {
         this.relationships = {};
     }
 
-    setField(name, type, isRequire = false, isUnique = false, defaultValue = null, length = null) {
+    setField(name, type, isRequired = false, isUnique = false, defaultValue = null, length = null) {
         if (!name) {
             throw new Error('Field name is required');
         }
@@ -35,7 +35,7 @@ module.exports = class Table {
         this.fields[name] = { 
             name, 
             type, 
-            isRequire, 
+            isRequired, 
             isUnique, 
             defaultValue,
             length
