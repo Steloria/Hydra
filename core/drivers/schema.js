@@ -7,11 +7,11 @@ module.exports = class Schema {
             throw new Error('Schema name is required');
         }
 
-        this.name = name
-        this.tables = {}
+        this.name = name;
+        this.tables = {};
     }
 
-    addTable(table) {
+    setTable(table) {
         if (!(table instanceof Table)) {
             throw new Error('Table must be instance of Table');
         }
@@ -25,10 +25,25 @@ module.exports = class Schema {
         return this;
     }
 
-    deleteTable() {}
+    deleteTable(table) {
+        if (!(table instanceof Table)) {
+            throw new Error('Table must be instance of Table');
+        }
 
-    setTable() {}
+        if (!this.tables[table.name]) {
+            throw new Error('Table with name ' + name + ' not exist');
+        }
 
-    export() {}
+        delete this.tables[table.name];
+
+        return this;
+    }
+
+    /**
+     * Must be overrided for each driver schema
+     */
+    export() {
+        throw new Error('Export function must be overrided by drivers')
+    }
 
 };
