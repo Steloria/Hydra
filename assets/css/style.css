@@ -129,7 +129,7 @@ button.remove {
     width: 100%;
 }
 .create .database svg path {
-	stroke: #000;
+	stroke: #FFF;
 	fill: none;
 	stroke-width: 3px;
 	cursor: pointer;

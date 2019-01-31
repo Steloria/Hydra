@@ -50,9 +50,11 @@
                 <div class="line-update" v-bind:class="{'expanded': lineShown == i}">
                   <select v-model="line.type">
                     <option value="Int">Integer</option>
+                    <option value="Float">Float</option>
                     <option value="String">String</option>
                     <option value="Array">Array</option>
                     <option value="Boolean">Boolean</option>
+                    <option value="Date">Date</option>
                   </select>
 
                   <p>Unique:</p>
@@ -101,7 +103,7 @@
             <svg>
               <path v-for="item,i in model.connexions" v-if="isComplete(i)" v-bind:d="getPos(i)" v-on:click="selectedConnexion = i; selectedTable = null;">
             </svg>
-            <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.posY + 'px', left: item.posX + 'px'}">
+            <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.posY + 'px', left: item.posX + 'px'}" v-bind:ref="item.id">
               <h3>{{ item.name }} <button v-on:click="selectedTable = index; selectedConnexion = null;"><i class="mi-pen"></i></button></h3>
               <div v-for="line in item.properties" class="lines">{{ line.name }} ({{ line.type }}<span v-if="line.size != ''"> - {{ line.size }}</span>)</div>
             </div>

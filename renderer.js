@@ -106,10 +106,28 @@ window.onload = function() {
       getPos: function(i) {
         let linkedTableFrom = this.findById(this.model.connexions[i].from);
         let linkedTableTo = this.findById(this.model.connexions[i].to);
-        let bezier = "M" + (linkedTableFrom.posX + 250) + "," + (linkedTableFrom.posY + 20) +
-          " Q" + (linkedTableFrom.posX + 280) + "," + (linkedTableFrom.posY + 20) +
-          " " + ((linkedTableTo.posX - 30 + linkedTableFrom.posX + 280) / 2) + "," + ((linkedTableTo.posY + 20 + linkedTableFrom.posY + 20) / 2) +
-          " T" + (linkedTableTo.posX) + "," + (linkedTableTo.posY + 20);
+        let x1 = linkedTableFrom.posX;
+        let y1 = linkedTableFrom.posY;
+        let x2 = linkedTableTo.posX;
+        let y2 = linkedTableTo.posY;
+        let h1 = this.$refs[linkedTableFrom.id][0].clientHeight;
+        let h2 = this.$refs[linkedTableTo.id][0].clientHeight;
+        var bezier = "";
+
+        if (Math.abs(x2 - x1) > Math.abs(y2 - y1)) {
+          if (x2 - x1 > 0) {
+            bezier = `M${x1 + 250},${y1 + (h1 / 2)} Q${x1 + 280},${y1 + (h1 / 2)} ${(x2 - 30 + x1 + 280) / 2},${(y2 + (h2 / 2) + y1 + (h1 / 2)) / 2}T${x2},${y2 + (h2 / 2)}`;
+          } else {
+            bezier = `M${x1},${y1 + (h1 / 2)} Q${x1 - 30},${y1 + (h1 / 2)} ${(x2 + 280 + x1 - 30) / 2},${(y2 + (h2 / 2) + y1 + (h1 / 2)) / 2} T${x2 + 250},${y2 + (h2 / 2)}`;
+          }
+        } else {
+          if (y2 - y1 > 0) {
+            bezier = `M${x1 + 125},${y1 + h1} Q${x1 + 125},${y1 + h1 + 20} ${(x2 + 125 + x1 + 125) / 2},${(y2 - 20 + y1 + h1 + 20) / 2} T${x2 + 125},${y2}`;
+          } else {
+            bezier = `M${x1 + 125},${y1} Q${x1 + 125},${y1 - 20} ${(x2 + 125 + x1 + 125) / 2},${(y2 - 20 + y1 + 20 + h2) / 2} T${x2 + 125},${y2 + h2}`;
+          }
+        }
+
         return bezier;
       },
       isComplete: function(i) {
