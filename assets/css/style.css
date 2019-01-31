@@ -112,12 +112,25 @@ button.remove {
 	z-index: 1;
 	height: 100vh;
 	overflow: scroll;
+	box-sizing: border-box;
 }
 .create .database {
 	flex: 3;
 	background-color: var(--color-bg-dark);
 	position: relative;
 	overflow: hidden;
+}
+.create .database svg {
+	position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+.create .database svg line {
+	stroke: #000;
+	stroke-width: 2;
+	cursor: pointer;
 }
 .create button i {
 	font-size: 8px;
@@ -144,6 +157,11 @@ button.remove {
     transform: rotate(30deg);
     font-size: 7px;
 }
+.create .lines .content button i.mi-close {
+	transform: rotate(45deg);
+    left: 17px;
+    top: 20px;
+}
 .create .lines .line-update {
 	height: 0;
 	overflow: hidden;
@@ -165,6 +183,8 @@ button.remove {
 	width: 250px;
 	box-shadow: 0 0 10px 2px var(--color-border);
 	cursor: pointer;
+	user-select: none;
+	box-sizing: border-box;
 }
 .db-item h3 {
 	text-align: center;
@@ -175,10 +195,12 @@ button.remove {
 	color: #FFF;
 	position: relative;
 	cursor: pointer;
+	width: 20px;
+	height: 20px;
 }
 .db-item h3 button i {
-	top: -15px;
-    left: 10px;
+	top: 5px;
+    left: 5px;
     font-size: 6px;
     transform: rotate(30deg);
 }
