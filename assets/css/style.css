@@ -274,3 +274,15 @@ button.remove {
 .db-item .date {
 	color: #c0392b;
 }
+
+/* Connections */
+.connection-item {
+	position: absolute;
+	background-color: #c38523;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 10px;
+    box-shadow: 0 0 10px 2px var(--color-border);
+    font-weight: bold;
+    cursor: pointer;
+}

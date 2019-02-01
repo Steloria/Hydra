@@ -119,6 +119,7 @@
               <svg>
                 <path v-for="item,i in model.connexions" v-if="isComplete(i)" v-bind:d="getPos(i)" v-on:click="selectedConnexion = i; selectedTable = null;">
               </svg>
+              <div class="connection-item" v-for="item,i in model.connexions" v-if="isComplete(i) && (item.name != '' || item.type != '')" v-on:click="selectedConnexion = i; selectedTable = null;" v-bind:style="{top: getMidPos(i, 'y') + 'px', left: getMidPos(i, 'x') + 'px'}" v-bind:ref="'conn' + i">{{ item.name }} <span v-if="item.type != ''">({{ item.type }})</span></div>
               <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.posY + 'px', left: item.posX + 'px'}" v-bind:ref="item.id">
                 <button v-on:click="selectedTable = index; selectedConnexion = null;"><i class="mi-pen"></i></button>
                 <h3>{{ item.name }}</h3>
