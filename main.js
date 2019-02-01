@@ -1,7 +1,7 @@
 const {app, BrowserWindow} = require('electron');
 var path = require('path');
 
-if (process.mas) app.setName('Codes Snippets');
+if (process.mas) app.setName('SchematisR');
 let mainWindow;
 
 function createWindow () {
@@ -14,7 +14,7 @@ function createWindow () {
     icon: path.join(__dirname, 'assets/icon/png/64x64.png')
   });
   mainWindow.loadFile('index.html');
-  //mainWindow.maximize()
+  mainWindow.maximize()
 
   mainWindow.on('closed', function () {
     mainWindow = null;

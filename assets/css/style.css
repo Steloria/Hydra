@@ -9,7 +9,7 @@ body {
 	height: 100%;
 }
 ::placeholder {
-  color: var(--text);
+  color: #AAA;
   opacity: 1;
 }
 body > div {
@@ -104,9 +104,6 @@ button.remove {
 	display: flex;
 	height: 100%;
 }
-.create > div {
-	padding: 30px;
-}
 .create .form {
 	flex: 1;
 	box-shadow: 2px 0 10px 0 #2e3b48;
@@ -114,6 +111,7 @@ button.remove {
 	height: 100vh;
 	overflow: scroll;
 	box-sizing: border-box;
+	padding: 30px;
 }
 .create .database {
 	flex: 3;
@@ -133,6 +131,46 @@ button.remove {
 	fill: none;
 	stroke-width: 3px;
 	cursor: pointer;
+}
+.create .database .db-container {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+.create .database .zoom {
+	bottom: 20px;
+	right: 20px;
+	position: absolute;
+	height: 60px;
+	display: flex;
+	flex-direction: column;
+}
+.create .database .zoom button {
+	height: 30px;
+	width: 30px;
+	background-color: #ecf0f1;
+	color: #34495e;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+	margin: 0;
+	min-height: initial;
+	border: 1px solid;
+	font-weight: bold;
+}
+.create .database .zoom button:active {
+	background-color: #bdc3c7;
+}
+.create .database .zoom button:first-child {
+	border-radius: 5px 5px 0 0;
+}
+.create .database .zoom button:last-child {
+	border-radius: 0 0 5px 5px;
+}
+.create .database .zoom button p {
+	padding: 0;
+	margin: 0;
 }
 .create button i {
 	font-size: 8px;
@@ -175,6 +213,16 @@ button.remove {
     border-radius: 5px;
     margin-bottom: 10px;
 }
+.form-connexion .flex p {
+	width: 100px;
+}
+.create .form-connexion .lines .content button {
+	width: 35px;
+}
+.create .form-connexion .lines .content button i.mi-close {
+	font-size: 5px;
+	left: 13px;
+}
 
 /* Database Schema */
 .db-item {
@@ -184,7 +232,7 @@ button.remove {
 	padding: 10px;
 	width: 250px;
 	box-shadow: 0 0 10px 2px var(--color-border);
-	cursor: pointer;
+	cursor: move;
 	user-select: none;
 	box-sizing: border-box;
 }
@@ -192,17 +240,37 @@ button.remove {
 	text-align: center;
 	margin: 5px;
 }
-.db-item h3 button {
+.db-item button {
 	all: initial;
 	color: #FFF;
-	position: relative;
+	position: absolute;
 	cursor: pointer;
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
+	top: 10px;
+	right: 10px;
 }
-.db-item h3 button i {
+.db-item button i {
 	top: 5px;
     left: 5px;
     font-size: 6px;
     transform: rotate(30deg);
+}
+.db-item .int {
+	color: #27ae60;
+}
+.db-item .float {
+	color: #16a085;
+}
+.db-item .string {
+	color: #f39c12;
+}
+.db-item .array {
+	color: #9b59b6;
+}
+.db-item .boolean {
+	color: #ecf0f1;
+}
+.db-item .date {
+	color: #c0392b;
 }

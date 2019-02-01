@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>ShematisR</title>
@@ -78,18 +78,33 @@
               </div>
               <button class="remove m-t-20" v-on:click="removeTable(selectedTable)">Remove Table</button>
             </div>
-            <div v-if="selectedConnexion != null">
+            <div v-if="selectedConnexion != null" class="form-connexion">
               <input type="text" placeholder="Relation Name" v-model="model.connexions[selectedConnexion].name">
-              <p>From:</p>
-              <select v-model="model.connexions[selectedConnexion].from">
-                <option v-for="item in model.tables" v-bind:value="item.id">{{ item.name }}</option>
-              </select>
-              <p>To:</p>
-              <select v-model="model.connexions[selectedConnexion].to">
-                <option v-for="item in model.tables" v-bind:value="item.id">{{ item.name }}</option>
-              </select>
+              <div class="flex">
+                <p>From:</p>
+                <select v-model="model.connexions[selectedConnexion].from">
+                  <option v-for="item in model.tables" v-bind:value="item.id">{{ item.name }}</option>
+                </select>
+              </div>
+              <div class="flex">
+                <p>To:</p>
+                <select v-model="model.connexions[selectedConnexion].to">
+                  <option v-for="item in model.tables" v-bind:value="item.id">{{ item.name }}</option>
+                </select>
+              </div>
 
-              <button class="m-b-20" v-on:click="addProperty"><i class="mi-plus"></i> Add Property</button>
+              <div class="flex m-t-20">
+                <p>Type:</p>
+                <select v-model="model.connexions[selectedConnexion].type">
+                  <option value="">-</option>
+                  <option value="1:1">One to One</option>
+                  <option value="1:N">One to Many</option>
+                  <option value="N:1">Many to One</option>
+                  <option value="N:N">Many to Many</option>
+                </select>
+              </div>
+
+              <button class="m-b-20 m-t-20" v-on:click="addProperty"><i class="mi-plus"></i> Add Property</button>
               <div v-for="line, i in model.connexions[selectedConnexion].properties" class="lines">
                 <div class="content">
                   <input type="text" placeholder="Property Name" v-model="line.name">
@@ -99,13 +114,20 @@
               <button class="remove m-t-20" v-on:click="removeConnexion(selectedConnexion)">Remove Relation</button>
             </div>
           </div>
-          <div class="database" v-on:mousemove="moveItem">
-            <svg>
-              <path v-for="item,i in model.connexions" v-if="isComplete(i)" v-bind:d="getPos(i)" v-on:click="selectedConnexion = i; selectedTable = null;">
-            </svg>
-            <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.posY + 'px', left: item.posX + 'px'}" v-bind:ref="item.id">
-              <h3>{{ item.name }} <button v-on:click="selectedTable = index; selectedConnexion = null;"><i class="mi-pen"></i></button></h3>
-              <div v-for="line in item.properties" class="lines">{{ line.name }} ({{ line.type }}<span v-if="line.size != ''"> - {{ line.size }}</span>)</div>
+          <div class="database" v-on:mousemove="moveItem" v-on:mouseup="stopMovingItem">
+            <div class="db-container" v-bind:style="{transform: scaleContainer()}">
+              <svg>
+                <path v-for="item,i in model.connexions" v-if="isComplete(i)" v-bind:d="getPos(i)" v-on:click="selectedConnexion = i; selectedTable = null;">
+              </svg>
+              <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.posY + 'px', left: item.posX + 'px'}" v-bind:ref="item.id">
+                <button v-on:click="selectedTable = index; selectedConnexion = null;"><i class="mi-pen"></i></button>
+                <h3>{{ item.name }}</h3>
+                <div v-for="line in item.properties" class="lines">{{ line.name }} (<span v-bind:class="line.type.toLowerCase()">{{ line.type }}</span><span v-if="line.size != ''"> - {{ line.size }}</span>)</div>
+              </div>
+            </div>
+            <div class="zoom">
+              <button v-on:click="changeScale('+')"><p>+</p></button>
+              <button v-on:click="changeScale('-')"><p>-</p></button>
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ window.onload = function() {
       selectedTable: null,
       selectedConnexion: null,
       lineShown: null,
+      scale: 1,
 
       /* Model */
       models: [],
@@ -42,7 +43,8 @@ window.onload = function() {
         name: 'CONNECTED_TO',
         properties: [],
         from: '',
-        to: ''
+        to: '',
+        type: ''
       },
 
       /* Drag & Drop */
@@ -160,8 +162,8 @@ window.onload = function() {
         if ((this.initialMouse.x == 0 && this.initialMouse.y == 0) || this.movingItem == null) {
           return
         }
-        this.model.tables[this.movingItem].posX = this.initialItemPos.x + (e.screenX - this.initialMouse.x);
-        this.model.tables[this.movingItem].posY = this.initialItemPos.y + (e.screenY - this.initialMouse.y);
+        if (this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posX = this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.scale - 1) * -1) + 1));
+        if (this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posY = this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.scale - 1) * -1) + 1));
       },
       stopMovingItem: function() {
         this.initialMouse.x = 0;
@@ -169,6 +171,23 @@ window.onload = function() {
         this.initialItemPos.x = 0;
         this.initialItemPos.y = 0;
         this.movingItem = null;
+      },
+
+      /* Scale */
+      scaleContainer: function() {
+        return `scale(${this.scale})`;
+      },
+      changeScale: function(type) {
+        switch (type) {
+          case "+":
+            if (this.scale < 1.3) this.scale += 0.1;
+            break;
+          case "-":
+            if (this.scale > 0.8) this.scale -= 0.1;
+            break;
+          default:
+            break;
+        }
       },
 
       /* Useful Functions */
@@ -181,7 +200,7 @@ window.onload = function() {
       },
       duplicate: function(elem) {
         return JSON.parse(JSON.stringify(elem));
-      },
+      }
     }
   })
 }
