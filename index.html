@@ -29,7 +29,16 @@
 
       <main>
         <div class="home" v-if="displayed == 'home'">
-          Home
+          <div class="add-model" v-on:click="newModel">
+            <h2>Create a new model</h2>
+            <div><i class="mi-plus"></i></div>
+          </div>
+          <div v-for="item,index in models">
+            <button class="remove" v-on:click="deleteModel(index)"><i class="mi-close"></i></button>
+            <h2>{{ item.name }}</h2>
+            <p>{{ item.tables.length }} tables; {{ item.connexions.length }} relations;</p>
+            <button class="load" v-on:click="loadModel(index)"><i class="mi-eye"></i></button>
+          </div>
         </div>
         <div class="create" v-if="displayed == 'create'">
           <div class="form">
@@ -113,6 +122,7 @@
               </div>
               <button class="remove m-t-20" v-on:click="removeConnexion(selectedConnexion)">Remove Relation</button>
             </div>
+            <button v-on:click="saveModel" class="m-t-50">Save Model</button>
           </div>
           <div class="database" v-on:mousemove="moveItem" v-on:mouseup="stopMovingItem">
             <div class="db-container" v-bind:style="{transform: scaleContainer()}">

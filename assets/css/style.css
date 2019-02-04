@@ -72,6 +72,76 @@ main {
 	padding: 30px;
 }
 
+/* Home */
+.home {
+	padding: 50px;
+	display: flex;
+	flex-wrap: wrap;
+}
+.home > div {
+	width: 250px;
+	background-color: var(--color-bg-dark);
+	border: 2px solid var(--color-shadow);
+	border-radius: 5px;
+	margin: 0 20px 20px 0;
+	text-align: center;
+	position: relative;
+	padding: 10px;
+}
+.home > div h2 {
+	font-size: 20px;
+}
+.home .add-model {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.home .add-model div {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	background-color: var(--color-shadow);
+	font-size: 10px;
+	position: relative;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home .add-model div i {
+	top: 19px;
+}
+.home > div:not(.add-model) button.load {
+	width: 60px;
+    font-size: 7px;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 38px;
+    min-height: initial;
+}
+.home > div:not(.add-model) button.load i {
+	transform: translate3d(-2px, 1px, 0);
+}
+.home > div:not(.add-model) button.remove {
+	position: absolute;
+	font-size: 4px;
+	height: 20px;
+	width: 20px;
+	padding: 0;
+	min-height: initial;
+	top: 5px;
+	right: 5px;
+	border-radius: 50%;
+}
+.home > div:not(.add-model) button.remove i {
+	top: 7px;
+    left: 6px;
+}
+
 /* Form */
 input[type="text"], button, select {
 	width: 100%;

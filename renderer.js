@@ -11,6 +11,7 @@ window.onload = function() {
       selectedConnexion: null,
       lineShown: null,
       scale: 1,
+      loaded: null,
 
       /* Model */
       models: [],
@@ -106,6 +107,8 @@ window.onload = function() {
         this.selectedConnexion = null;
       },
       getPos: function(i) {
+        if (typeof this.$refs['conn' + i] == "undefined" || typeof this.$refs['conn' + i][0] == "undefined") return;
+
         let linkedTableFrom = this.findById(this.model.connexions[i].from);
         let linkedTableTo = this.findById(this.model.connexions[i].to);
         let x1 = linkedTableFrom.posX;
@@ -232,6 +235,52 @@ window.onload = function() {
           default:
             break;
         }
+      },
+
+      newModel: function() {
+        if (this.model.name != 'New Database' || this.model.tables.length > 0) {
+          if (!confirm("You were already editing an unsaved model, do you want to create a new one ?")) return;
+        }
+        this.reset();
+        this.displayed = "create";
+      },
+      loadModel: function(i) {
+        if (this.model.name != 'New Database' || this.model.tables.length > 0) {
+          if (!confirm("You were already editing an unsaved model, do you want to load this one ?")) return;
+        }
+        this.reset();
+        this.model = this.models[i];
+        this.displayed = "create";
+        this.loaded = i;
+      },
+      saveModel: function() {
+        if (this.loaded == null) {
+          this.models.push(this.model);
+        } else {
+          this.models[this.loaded] = this.model;
+        }
+        localStorage.setItem("models", JSON.stringify(this.models));
+        alert("Model successfully saved");
+        this.displayed = "home";
+        this.reset();
+      },
+      deleteModel: function(i) {
+        if (!confirm("This action can't be undone, are you sure ?")) return;
+        if (this.model.loaded == i) this.model.loaded = null;
+        this.models.splice(i, 1);
+        localStorage.setItem("models", JSON.stringify(this.models));
+      },
+      reset: function() {
+        this.model = {
+          name: 'New Database',
+          tables: [],
+          connexions: []
+        };
+        this.selectedTable = null;
+        this.selectedConnexion = null;
+        this.lineShown = null;
+        this.scale = 1;
+        this.loaded = null;
       },
 
       /* Useful Functions */
