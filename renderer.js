@@ -87,6 +87,7 @@ window.onload = function() {
             size: '',
             default: ''
           });
+        this.lineShown = this.model.tables[this.selectedTable].properties.length - 1;
       },
       showLine: function(i) {
         this.lineShown = this.lineShown != i ? i : null;
@@ -252,6 +253,7 @@ window.onload = function() {
         this.model = this.models[i];
         this.displayed = "create";
         this.loaded = i;
+        this.activateDisplayWithDelay();
       },
       saveModel: function() {
         if (this.loaded == null) {
@@ -293,6 +295,18 @@ window.onload = function() {
       },
       duplicate: function(elem) {
         return JSON.parse(JSON.stringify(elem));
+      },
+      /* Useful to display relations properly */
+      activateDisplayWithDelay: function() {
+        var f = this.activateDisplay;
+        setTimeout(function() {
+          f();
+        }, 10);
+      },
+      activateDisplay: function() {
+        var name = this.model.name;
+        this.model.name += " ";
+        this.model.name = name;
       }
     }
   })

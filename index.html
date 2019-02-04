@@ -78,7 +78,7 @@
                     <option value="false">False</option>
                   </select>
 
-                  <input type="text" placeholder="Size" v-model="line.size">
+                  <input v-if="line.type == 'String'" type="text" placeholder="Size" v-model="line.size">
 
                   <input type="text" placeholder="Default Value" v-model="line.default">
 
@@ -91,13 +91,13 @@
               <input type="text" placeholder="Relation Name" v-model="model.connexions[selectedConnexion].name">
               <div class="flex">
                 <p>From:</p>
-                <select v-model="model.connexions[selectedConnexion].from">
+                <select v-model="model.connexions[selectedConnexion].from" v-on:change="activateDisplayWithDelay">
                   <option v-for="item in model.tables" v-bind:value="item.id">{{ item.name }}</option>
                 </select>
               </div>
               <div class="flex">
                 <p>To:</p>
-                <select v-model="model.connexions[selectedConnexion].to">
+                <select v-model="model.connexions[selectedConnexion].to"  v-on:change="activateDisplayWithDelay">
                   <option v-for="item in model.tables" v-bind:value="item.id">{{ item.name }}</option>
                 </select>
               </div>
