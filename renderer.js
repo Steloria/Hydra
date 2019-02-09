@@ -1,9 +1,16 @@
+var path = require('path');
+var fs = require('fs');
+let f = path.join(__dirname, 'assets/json/models.json');
+
 window.onload = function() {
   var home = new Vue({
     el: '#home',
     created() {
-      this.models = JSON.parse(localStorage.getItem("models"));
-      if (this.models == null) this.models = [];
+      let fun = this.loadModels;
+      fs.readFile(f, 'utf8', function (err,data) {
+        if (err) return console.log(err);
+        fun(JSON.parse(data));
+      });
     },
     data: {
       displayed: 'home',
@@ -261,7 +268,7 @@ window.onload = function() {
         } else {
           this.models[this.loaded] = this.model;
         }
-        localStorage.setItem("models", JSON.stringify(this.models));
+        this.saveModels();
         alert("Model successfully saved");
         this.displayed = "home";
         this.reset();
@@ -270,7 +277,7 @@ window.onload = function() {
         if (!confirm("This action can't be undone, are you sure ?")) return;
         if (this.model.loaded == i) this.model.loaded = null;
         this.models.splice(i, 1);
-        localStorage.setItem("models", JSON.stringify(this.models));
+        this.saveModels();
       },
       reset: function() {
         this.model = {
@@ -307,6 +314,16 @@ window.onload = function() {
         var name = this.model.name;
         this.model.name += " ";
         this.model.name = name;
+      },
+      saveModels: function() {
+        fs.writeFile(f, JSON.stringify(this.models), function(err) {
+          if (err) {
+            console.log(err);
+          }
+        });
+      },
+      loadModels: function(data) {
+        this.models = data;
       }
     }
   })

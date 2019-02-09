@@ -1,7 +1,8 @@
 const {app, BrowserWindow} = require('electron');
 var path = require('path');
+var fs = require('fs');
 
-if (process.mas) app.setName('SchematisR');
+if (process.mas) app.setName('Hydra');
 let mainWindow;
 
 function createWindow () {
@@ -19,6 +20,13 @@ function createWindow () {
   mainWindow.on('closed', function () {
     mainWindow = null;
   })
+
+  let f = path.join(__dirname, 'assets/json/models.json');
+  if (!fs.existsSync(f)) {
+    fs.writeFile(f, JSON.stringify("[]"), function(err) {
+        if (err) console.log(err);
+    });
+  }
 }
 
 app.on('ready', createWindow);
