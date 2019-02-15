@@ -126,7 +126,7 @@ main {
 .home > div:not(.add-model) button.load i {
 	transform: translate3d(-2px, 1px, 0);
 }
-.home > div:not(.add-model) button.remove {
+.home > div:not(.add-model) button.menu {
 	position: absolute;
 	font-size: 4px;
 	height: 20px;
@@ -136,10 +136,14 @@ main {
 	top: 5px;
 	right: 5px;
 	border-radius: 50%;
+	background-color: #FFF;
+	color: #000;
 }
-.home > div:not(.add-model) button.remove i {
-	top: 7px;
-    left: 6px;
+.home > div:not(.add-model) button.menu p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: -9px;
 }
 
 /* Form */
@@ -356,4 +360,61 @@ button.remove {
     font-weight: bold;
     cursor: pointer;
     user-select: none;
+}
+
+/*
+* Popup
+*/
+.popup-container {
+	z-index: 9999;
+}
+.popup-container, .popup-container .overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.popup-container .overlay {
+	background-color: rgba(0, 0, 0, 0.3);
+}
+.popup-container .popup {
+	box-shadow: 0 1px 5px 0 var(--color-shadow);
+	z-index: 1;
+	background-color: var(--color-bg);
+	border: 2px solid var(--color-bg-dark);
+	border-radius: 10px;
+	width: 70%;
+	min-height: 300px;
+	padding: 20px 50px;
+	position: relative;
+	max-height: 80vh;
+	overflow: scroll;
+}
+.popup h2 {
+	font-size: 30px;
+	text-align: center;
+}
+.popup .close-button {
+	background-color: transparent;
+	padding: 0;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	min-height: initial;
+	border: none;
+	position: absolute;
+	right: 30px;
+	top: 20px;
+	color: #FFF;
+	font-size: 7px;
+	cursor: pointer;
+}
+.popup .remove {
+	max-width: 300px;
+	display: block;
+	margin: auto;
 }

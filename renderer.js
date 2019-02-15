@@ -6,26 +6,24 @@ window.onload = function() {
   var home = new Vue({
     el: '#home',
     created() {
-      let fun = this.loadModels;
-      fs.readFile(f, 'utf8', function (err,data) {
-        if (err) return console.log(err);
-        fun(JSON.parse(data));
-      });
+      this.getModels()
     },
     data: {
       displayed: 'home',
       selectedTable: null,
       selectedConnexion: null,
       lineShown: null,
-      scale: 1,
       loaded: null,
+      showPopup: false,
+      selectedModel: null,
 
       /* Model */
       models: [],
       model: {
         name: 'New Database',
         tables: [],
-        connexions: []
+        connexions: [],
+        scale: 1
       },
 
       /* Table */
@@ -217,8 +215,8 @@ window.onload = function() {
         if ((this.initialMouse.x == 0 && this.initialMouse.y == 0) || this.movingItem == null) {
           return
         }
-        if (this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posX = this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.scale - 1) * -1) + 1));
-        if (this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posY = this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.scale - 1) * -1) + 1));
+        if (this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posX = this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1));
+        if (this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posY = this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1));
       },
       stopMovingItem: function() {
         this.initialMouse.x = 0;
@@ -230,15 +228,15 @@ window.onload = function() {
 
       /* Scale */
       scaleContainer: function() {
-        return `scale(${this.scale})`;
+        return `scale(${this.model.scale})`;
       },
       changeScale: function(type) {
         switch (type) {
           case "+":
-            if (this.scale < 1.3) this.scale += 0.1;
+            if (this.model.scale < 1.3) this.model.scale += 0.1;
             break;
           case "-":
-            if (this.scale > 0.8) this.scale -= 0.1;
+            if (this.model.scale > 0.8) this.model.scale -= 0.1;
             break;
           default:
             break;
@@ -256,6 +254,7 @@ window.onload = function() {
         if (this.model.name != 'New Database' || this.model.tables.length > 0) {
           if (!confirm("You were already editing an unsaved model, do you want to load this one ?")) return;
         }
+        this.getModels();
         this.reset();
         this.model = this.models[i];
         this.displayed = "create";
@@ -275,12 +274,32 @@ window.onload = function() {
       },
       deleteModel: function(i) {
         if (!confirm("This action can't be undone, are you sure ?")) return;
+        this.showPopup = false;
+        this.selectedModel = null;
         if (this.model.loaded == i) this.model.loaded = null;
         this.models.splice(i, 1);
         this.saveModels();
       },
+      getModels: function() {
+        let fun = this.loadModels;
+        fs.readFile(f, 'utf8', function (err,data) {
+          if (err) return console.log(err);
+          fun(JSON.parse(data));
+        });
+      },
+      saveModels: function() {
+        fs.writeFile(f, JSON.stringify(this.models), function(err) {
+          if (err) {
+            console.log(err);
+          }
+        });
+      },
+      loadModels: function(data) {
+        this.models = data;
+      },
       reset: function() {
         this.model = {
+          scale: 1,
           name: 'New Database',
           tables: [],
           connexions: []
@@ -288,7 +307,6 @@ window.onload = function() {
         this.selectedTable = null;
         this.selectedConnexion = null;
         this.lineShown = null;
-        this.scale = 1;
         this.loaded = null;
       },
 
@@ -315,16 +333,6 @@ window.onload = function() {
         this.model.name += " ";
         this.model.name = name;
       },
-      saveModels: function() {
-        fs.writeFile(f, JSON.stringify(this.models), function(err) {
-          if (err) {
-            console.log(err);
-          }
-        });
-      },
-      loadModels: function(data) {
-        this.models = data;
-      }
     }
   })
 }

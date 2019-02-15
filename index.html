@@ -18,7 +18,7 @@
             <button type="button" id="button-clipboard" class="nav-button" v-on:click="displayed = 'home'">
               <i class="mi-home"></i>
             </button>
-            <button type="button" id="button-clipboard" class="nav-button" v-on:click="displayed = 'create'">
+            <button type="button" id="button-clipboard" class="nav-button" v-on:click="displayed = 'create'; activateDisplayWithDelay()">
               <i class="mi-plus"></i>
             </button>
           </li>
@@ -28,13 +28,25 @@
       </nav>
 
       <main>
+        <div class="popup-container" v-if="showPopup">
+          <div class="overlay" v-on:click="showPopup = false; selectedModel = null"></div>
+          <div class="popup">
+            <button class="close-button" v-on:click="showPopup = false; selectedModel = null">
+              <i class="mi-close"></i>
+            </button>
+            <div v-if="selectedModel != null">
+              <h2>{{ models[selectedModel].name }}</h2>
+              <button class="remove" v-on:click="deleteModel(selectedModel)">Remove Model</button>
+            </div>
+          </div>
+        </div>
         <div class="home" v-if="displayed == 'home'">
           <div class="add-model" v-on:click="newModel">
             <h2>Create a new model</h2>
             <div><i class="mi-plus"></i></div>
           </div>
           <div v-for="item,index in models">
-            <button class="remove" v-on:click="deleteModel(index)"><i class="mi-close"></i></button>
+            <button class="menu" v-on:click="selectedModel = index; showPopup = true"><p>...</p></button>
             <h2>{{ item.name }}</h2>
             <p>{{ item.tables.length }} tables; {{ item.connexions.length }} relations;</p>
             <button class="load" v-on:click="loadModel(index)"><i class="mi-eye"></i></button>
