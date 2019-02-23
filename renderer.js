@@ -1,12 +1,14 @@
 var path = require('path');
 var fs = require('fs');
 let f = path.join(__dirname, 'assets/json/models.json');
+var drivers = require(path.join(__dirname, 'core/drivers/index.js'));
 
 window.onload = function() {
   var home = new Vue({
     el: '#home',
     created() {
-      this.getModels()
+      this.getModels();
+      this.available = drivers.getAvailableDrivers();
     },
     data: {
       displayed: 'home',
@@ -16,6 +18,10 @@ window.onload = function() {
       loaded: null,
       showPopup: false,
       selectedModel: null,
+      showExport: false,
+
+      /* Export */
+      available: null,
 
       /* Model */
       models: [],
@@ -308,6 +314,20 @@ window.onload = function() {
         this.selectedConnexion = null;
         this.lineShown = null;
         this.loaded = null;
+      },
+
+      /* Export */
+      exportDb(key) {
+        let db = new this.available[key](this.models[this.selectedModel].name);
+        for (const i of this.models[this.selectedModel].tables) {
+          let table = new drivers.Table(i.name);
+          for (const j of i.properties) {
+            table.setField(j.name, j.type, j.isRequired, j.isUnique, j.defaultValue, j.length);
+          }
+          db.setTable(table);
+        }
+        console.log(db);
+        console.log(db.export("/Users/medrupaloscil/Desktop"));
       },
 
       /* Useful Functions */

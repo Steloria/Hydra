@@ -9,7 +9,7 @@ module.exports = class MySQLSchema extends Schema {
 			throw new Error('Output directory not exist');
 		}
 
-		let file = `CREATE DATABASE ${this.name}; \n\n`;
+		let file = `CREATE DATABASE ${this.name};\nUSE ${this.name}; \n\n`;
 
 		for (const k in this.tables) {
 			file += this.buildTable(this.tables[k]);
@@ -39,6 +39,10 @@ module.exports = class MySQLSchema extends Schema {
 		switch(type) {
 			case Table.TYPE_STRING:
 				return 'varchar(255)';
+			case Table.TYPE_INT:
+				return 'integer';
+			case Table.TYPE_FLOAT:
+				return 'float';
 			case Table.TYPE_NUMBER:
 				return 'double';
 			case Table.TYPE_BOOLEAN:

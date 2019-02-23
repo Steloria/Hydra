@@ -2,6 +2,8 @@ module.exports = class Table {
 
     static get TYPE_STRING() { return 'String'; }
     static get TYPE_NUMBER() { return 'Number'; }
+    static get TYPE_INT() { return 'Int'; }
+    static get TYPE_FLOAT() { return 'Float'; }
     static get TYPE_BOOLEAN() { return 'Boolean'; }
     static get TYPE_DATE() { return 'Date'; }
 
@@ -28,8 +30,9 @@ module.exports = class Table {
             throw new Error('A field with the name ' + name + ' is already set');
         }
 
-        if (![Table.TYPE_STRING, Table.TYPE_NUMBER, Table.TYPE_BOOLEAN, Table.TYPE_DATE].includes(type)) {
-            throw new Error(`Type must be part of ${Table.TYPE_STRING}, ${Table.TYPE_NUMBER}, ${Table.TYPE_DATE} or ${Table.TYPE_BOOLEAN}`);
+        if (![Table.TYPE_STRING, Table.TYPE_NUMBER, Table.TYPE_BOOLEAN, Table.TYPE_DATE, Table.TYPE_INT, Table.TYPE_FLOAT].includes(type)) {
+            console.log(type);
+            throw new Error(`Type must be part of ${Table.TYPE_STRING}, ${Table.TYPE_NUMBER}, ${Table.TYPE_DATE}, ${Table.TYPE_INT}, ${Table.TYPE_FLOAT} or ${Table.TYPE_BOOLEAN}`);
         }
 
         this.fields[name] = { 

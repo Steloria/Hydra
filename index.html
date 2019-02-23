@@ -36,7 +36,13 @@
             </button>
             <div v-if="selectedModel != null">
               <h2>{{ models[selectedModel].name }}</h2>
-              <button class="remove" v-on:click="deleteModel(selectedModel)">Remove Model</button>
+              <button class="btn" v-on:click="showExport = !showExport">Export</button>
+              <div class="export-form m-b-20 m-t-20" v-bind:class="{'opened': showExport}">
+                <div class="db-choice">
+                  <div v-for="i in Object.keys(available)" v-on:click="exportDb(i)">{{ i }}</div>
+                </div>
+              </div>
+              <button class="btn remove" v-on:click="deleteModel(selectedModel)">Remove Model</button>
             </div>
           </div>
         </div>

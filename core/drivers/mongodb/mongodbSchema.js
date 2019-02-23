@@ -28,7 +28,7 @@ module.exports = class MongoDBSchema extends Schema {
 
 		for (let k in fields) {
 			const field = fields[k];
-			body += `\t${field.name}: { type: ${field.type}, required: ${field.isRequired}, unique: ${field.isUnique} }, \n`;
+			body += `\t${field.name}: { type: ${this.getMongoType(field.type)}, required: ${field.isRequired}, unique: ${field.isUnique} }, \n`;
 		}
 
 		body += `}); \n\n`
@@ -37,4 +37,22 @@ module.exports = class MongoDBSchema extends Schema {
 		return body.trim();
 	}
 
+	getMongoType(type) {
+		switch(type) {
+			case Table.TYPE_STRING:
+				return 'String';
+			case Table.TYPE_INT:
+				return 'Number';
+			case Table.TYPE_FLOAT:
+				return 'Number';
+			case Table.TYPE_NUMBER:
+				return 'Number';
+			case Table.TYPE_BOOLEAN:
+				return 'Boolean';
+			case Table.TYPE_DATE:
+				return 'Date';
+			default:
+				throw Error('Unsupported type');
+		}
+	}
 };

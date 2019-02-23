@@ -413,8 +413,20 @@ button.remove {
 	font-size: 7px;
 	cursor: pointer;
 }
-.popup .remove {
+.popup .btn {
 	max-width: 300px;
 	display: block;
 	margin: auto;
+}
+.popup .export-form {
+	background: #1d2c3b;
+	transition-duration: 0.2s;
+	height: 0px;
+	opacity: 0;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.popup .export-form.opened {
+	height: 300px;
+	opacity: 1;
 }
