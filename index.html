@@ -29,17 +29,25 @@
 
       <main>
         <div class="popup-container" v-if="showPopup">
-          <div class="overlay" v-on:click="showPopup = false; selectedModel = null"></div>
+          <div class="overlay" v-on:click="showPopup = false; selectedModel = null; exporter.db = ''"></div>
           <div class="popup">
             <button class="close-button" v-on:click="showPopup = false; selectedModel = null">
               <i class="mi-close"></i>
             </button>
             <div v-if="selectedModel != null">
               <h2>{{ models[selectedModel].name }}</h2>
-              <button class="btn" v-on:click="showExport = !showExport">Export</button>
-              <div class="export-form m-b-20 m-t-20" v-bind:class="{'opened': showExport}">
+              <button class="btn" v-on:click="exporter.show = !exporter.show">Export</button>
+              <div class="export-form m-b-20 m-t-20" v-bind:class="{'opened': exporter.show}">
+                <div>
+                  <input type="file" v-model="exporter.folder" webkitdirectory directory>
+                  <p>{{ exporter.folder }}</p>
+                </div>
                 <div class="db-choice">
-                  <div v-for="i in Object.keys(available)" v-on:click="exportDb(i)">{{ i }}</div>
+                  <div v-for="i in Object.keys(available)" v-on:click="getAvailableApi(i)">{{ i }}</div>
+                </div>
+                <button v-if="exporter.db != ''" v-on:click="exportDb(available[exporter.db])">Export API</button>
+                <div class="db-choice" v-if="exporter.db != ''">
+                  <div v-for="i in Object.keys(exporter.availableApi)" v-on:click="exportDb(exporter.availableApi[i])">{{ i }}</div>
                 </div>
               </div>
               <button class="btn remove" v-on:click="deleteModel(selectedModel)">Remove Model</button>

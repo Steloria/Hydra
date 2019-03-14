@@ -18,10 +18,16 @@ window.onload = function() {
       loaded: null,
       showPopup: false,
       selectedModel: null,
-      showExport: false,
 
       /* Export */
       available: null,
+      exporter: {
+        show: false,
+        db: "",
+        folder: "",
+        availableApi: {},
+        options: []
+      },
 
       /* Model */
       models: [],
@@ -317,8 +323,13 @@ window.onload = function() {
       },
 
       /* Export */
-      exportDb(key) {
-        let db = new this.available[key](this.models[this.selectedModel].name);
+      getAvailableApi(key) {
+        this.exporter.db = key;
+        let db = new this.available[this.exporter.db]("empty");
+        this.exporter.availableApi = db.getAvailableAPI();
+      },
+      exportDb(obj) {
+        let db = new obj(this.models[this.selectedModel].name);
         for (const i of this.models[this.selectedModel].tables) {
           let table = new drivers.Table(i.name);
           for (const j of i.properties) {
@@ -326,8 +337,7 @@ window.onload = function() {
           }
           db.setTable(table);
         }
-        console.log(db);
-        console.log(db.export("/Users/medrupaloscil/Desktop"));
+        console.log(db.export("/Users/medrupaloscil/Desktop/test"));
       },
 
       /* Useful Functions */

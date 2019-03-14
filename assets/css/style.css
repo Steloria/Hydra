@@ -430,3 +430,18 @@ button.remove {
 	height: 300px;
 	opacity: 1;
 }
+
+.db-choice {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 20px;
+}
+.db-choice div {
+	color: #FFF;
+	border: 2px solid;
+	padding: 5px 10px;
+	border-radius: 2px;
+	margin-right: 20px;
+	cursor: pointer;
+}

@@ -19,6 +19,8 @@
     "electron-packager": "^13.0.1"
   },
   "dependencies": {
+    "js-beautify": "*",
+    "mkdirp": "^0.5.1",
     "vue": "^2.6.3"
   }
 }

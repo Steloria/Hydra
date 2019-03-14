@@ -5,7 +5,7 @@ module.exports = class MongoDBSchema extends Schema {
 
 	export(output) {
 		if (!fs.existsSync(output)) {
-			throw new Error('Output directory not exist');
+			throw new Error('Output directory does not exist');
 		}
 
 		const tables = [];
@@ -54,5 +54,9 @@ module.exports = class MongoDBSchema extends Schema {
 			default:
 				throw Error('Unsupported type');
 		}
+	}
+
+	getAvailableAPI() {
+		return {}
 	}
 };

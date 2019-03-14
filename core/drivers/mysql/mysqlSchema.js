@@ -6,7 +6,7 @@ module.exports = class MySQLSchema extends Schema {
 
 	export(output) {
 		if (!fs.existsSync(output)) {
-			throw new Error('Output directory not exist');
+			throw new Error('Output directory does not exist');
 		}
 
 		let file = `CREATE DATABASE ${this.name};\nUSE ${this.name}; \n\n`;
@@ -54,4 +54,7 @@ module.exports = class MySQLSchema extends Schema {
 		}
 	}
 
+	getAvailableAPI() {
+		return {}
+	}
 };
