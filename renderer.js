@@ -10,6 +10,7 @@ window.onload = function() {
       this.getModels();
       this.available = drivers.getAvailableDrivers();
     },
+    watch: {},
     data: {
       displayed: 'home',
       selectedTable: null,
@@ -26,7 +27,8 @@ window.onload = function() {
         db: "",
         folder: "",
         availableApi: {},
-        options: []
+        options: [],
+        api: ""
       },
 
       /* Model */
@@ -38,7 +40,6 @@ window.onload = function() {
         scale: 1
       },
 
-      /* Table */
       newTable: {
         id: '',
         name: "New Table",
@@ -56,25 +57,20 @@ window.onload = function() {
         ],
       },
 
-      /* Connexion */
       newConnexion: {
-        name: '',
-        properties: [],
-        from: '',
-        to: '',
-        type: ''
+          name: '',
+          properties: [],
+          from: '',
+          to: '',
+          type: ''
       },
 
       /* Drag & Drop */
-      initialMouse: {
-        x: 0,
-        y: 0
-      },
-      initialItemPos: {
-        x: 0,
-        y: 0
-      },
+      initialMouse: {x: 0, y: 0},
+      initialItemPos: {x: 0, y: 0},
+      containerPos: {x: 0, y: 0},
       movingItem: null,
+      isContainerMoving: false
     },
     methods: {
       /* Tables */
@@ -186,16 +182,7 @@ window.onload = function() {
           }
         }
 
-        switch(t) {
-          case 'x':
-            return x - (this.$refs['conn' + i][0].clientWidth / 2);
-            break;
-          case 'y':
-            return y - 12;
-            break;
-          default:
-            break;
-        }
+        return t == 'x' ? x - (this.$refs['conn' + i][0].clientWidth / 2) : y - 12;
       },
       isComplete: function(i) {
         if (this.model.connexions[i].from != '' && this.model.connexions[i].to != '') {
@@ -222,13 +209,28 @@ window.onload = function() {
           this.initialItemPos.y = this.model.tables[pos].posY;
         }
         this.movingItem = pos;
+        this.isContainerMoving = false;
+      },
+      startMovingContainer: function(e) {
+        if (this.initialMouse.x == 0 && this.initialMouse.y == 0 && this.movingItem == null) {
+          this.initialMouse.x = e.screenX;
+          this.initialMouse.y = e.screenY;
+          this.initialItemPos.x = this.containerPos.x;
+          this.initialItemPos.y = this.containerPos.y;
+          this.isContainerMoving = true;
+        }
       },
       moveItem: function(e) {
-        if ((this.initialMouse.x == 0 && this.initialMouse.y == 0) || this.movingItem == null) {
+        if ((this.initialMouse.x == 0 && this.initialMouse.y == 0) || (this.movingItem == null && this.isContainerMoving == false)) {
           return
         }
-        if (this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posX = this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1));
-        if (this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posY = this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1));
+        if (this.isContainerMoving) {
+          this.containerPos.x = this.initialItemPos.x + ((e.screenX - this.initialMouse.x));
+          this.containerPos.y = this.initialItemPos.y + ((e.screenY - this.initialMouse.y));
+        } else {
+          if (this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posX = this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1));
+          if (this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posY = this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1));
+        }
       },
       stopMovingItem: function() {
         this.initialMouse.x = 0;
@@ -248,7 +250,7 @@ window.onload = function() {
             if (this.model.scale < 1.3) this.model.scale += 0.1;
             break;
           case "-":
-            if (this.model.scale > 0.8) this.model.scale -= 0.1;
+            if (this.model.scale > 0.7) this.model.scale -= 0.1;
             break;
           default:
             break;
@@ -272,6 +274,8 @@ window.onload = function() {
         this.displayed = "create";
         this.loaded = i;
         this.activateDisplayWithDelay();
+        var s = (this.model.scale - 1) * 1000;
+        this.containerPos = {x: s, y: s};
       },
       saveModel: function() {
         if (this.loaded == null) {
@@ -320,20 +324,26 @@ window.onload = function() {
         this.selectedConnexion = null;
         this.lineShown = null;
         this.loaded = null;
+        this.containerPos = {x: 0, y: 0};
       },
 
       /* Export */
       getAvailableApi(key) {
+        this.exporter.api = "";
         this.exporter.db = key;
         let db = new this.available[this.exporter.db]("empty");
         this.exporter.availableApi = db.getAvailableAPI();
       },
+      isExportable() {
+        let db = new this.available[this.exporter.db]("empty");
+        return db.isExportable();
+      },
       exportDb(obj) {
-        let db = new obj(this.models[this.selectedModel].name);
+        let db = new obj(this.models[this.selectedModel].name.toLowerCase());
         for (const i of this.models[this.selectedModel].tables) {
-          let table = new drivers.Table(i.name);
+          let table = new drivers.Table(i.name.toLowerCase());
           for (const j of i.properties) {
-            table.setField(j.name, j.type, j.isRequired, j.isUnique, j.defaultValue, j.length);
+            table.setField(j.name.toLowerCase(), j.type, j.required, j.unique, j.default, j.length);
           }
           db.setTable(table);
         }

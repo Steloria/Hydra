@@ -56,7 +56,7 @@ module.exports = class Neo4JNodeApi extends Schema {
 		for (let k in fields) {
 			const field = fields[k];
 			if (field.isRequired) {
-				body += `if (!req.body.${field.name}) \nreturn res.json({success: false, msg: '${field.name} missing.';`;
+				body += `if (!req.body.${field.name}) \nreturn res.json({success: false, msg: '${field.name} missing.'});`;
 			}
 			nodeParams += `${field.name}: {${field.name}}, `;
 			params += `${field.name}: req.body.${field.name}, `;
@@ -80,7 +80,24 @@ module.exports = class Neo4JNodeApi extends Schema {
 	}
 
 	buildPatch(name, fields) {
-		return "";
+		let body = `app.patch('/${name.toLowerCase()}/:id', (req, res) => {\nconst id = req.params.id;\n`;
+		let nodeParams = "";
+		let params = "";
+
+		for (let k in fields) {
+			const field = fields[k];
+			if (field.name != "id") {
+				if (field.isRequired) {
+					body += `if (!req.body.${field.name}) \nreturn res.json({success: false, msg: '${field.name} missing.'});`;
+				}
+				nodeParams += `${field.name}: {${field.name}}, `;
+				params += `${field.name}: req.body.${field.name}, `;
+			}
+		}
+
+		params += "id: id"
+		body += `db.run('MATCH (n:${name}) WHERE ID(n) = {id} SET n = {${nodeParams.slice(0, -2)}} RETURN n', {${params}})\n.then((result) => {res.send(result);})\n.catch((err) => console.log(err));\n});`;
+		return body;
 	}
 
 	buildDelete(name, fields) {

@@ -172,6 +172,9 @@ button {
 button.remove {
 	background-color: var(--color-error);
 }
+.flex {
+	display: flex;
+}
 
 /* Models */
 .create {
@@ -207,9 +210,15 @@ button.remove {
 	cursor: pointer;
 }
 .create .database .db-container {
-	height: 100%;
-	width: 100%;
-	position: relative;
+	height: 2000px;
+	width: 2000px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-shadow: none;
+}
+.create .database .db-container:active {
+	box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.3);
 }
 .create .database .zoom {
 	bottom: 20px;
@@ -425,10 +434,28 @@ button.remove {
 	opacity: 0;
 	border-radius: 5px;
 	overflow: hidden;
+	padding: 10px;
+}
+.export-form button {
+	width: auto;
 }
 .popup .export-form.opened {
 	height: 300px;
 	opacity: 1;
+}
+.export-form input[type="file"] {
+	margin: 10px auto;
+	display: block;
+}
+.export-form h2 {
+	font-size: 20px;
+}
+.export-form .flex {
+	justify-content: center;
+    border-top: 1px solid #BBB;
+    padding: 10px;
+    width: 80%;
+    margin: auto;
 }
 
 .db-choice {
@@ -437,11 +464,19 @@ button.remove {
 	justify-content: center;
 	padding: 20px;
 }
-.db-choice div {
+.db-choice input[type="radio"] {
+	display: none;
+}
+.db-choice label {
 	color: #FFF;
 	border: 2px solid;
 	padding: 5px 10px;
 	border-radius: 2px;
 	margin-right: 20px;
 	cursor: pointer;
+}
+.db-choice input[type="radio"]:checked ~ label {
+	color: #1d2c3b;
+	background: #FFF;
+	border-color: #FFF;
 }

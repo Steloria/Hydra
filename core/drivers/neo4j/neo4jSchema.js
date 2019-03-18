@@ -5,6 +5,8 @@ const fs = require('fs');
 const Neo4JNodeApi = require('./api/node/neo4JNodeApi');
 
 module.exports = class Neo4JSchema extends Schema {
+	isExportable() {return false}
+
 	export(output) {}
 
 	getAvailableAPI() {

@@ -2,6 +2,7 @@ const Schema = require('../schema');
 const fs = require('fs');
 
 module.exports = class MongoDBSchema extends Schema {
+	isExportable() {return true}
 
 	export(output) {
 		if (!fs.existsSync(output)) {

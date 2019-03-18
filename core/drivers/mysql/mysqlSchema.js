@@ -3,6 +3,7 @@ const Table = require('../table');
 const fs = require('fs');
 
 module.exports = class MySQLSchema extends Schema {
+	isExportable() {return true}
 
 	export(output) {
 		if (!fs.existsSync(output)) {

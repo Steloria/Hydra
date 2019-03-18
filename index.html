@@ -43,11 +43,26 @@
                   <p>{{ exporter.folder }}</p>
                 </div>
                 <div class="db-choice">
-                  <div v-for="i in Object.keys(available)" v-on:click="getAvailableApi(i)">{{ i }}</div>
+                  <div v-for="i in Object.keys(available)">
+                    <input type="radio" name="dbName" v-bind:id="i" v-bind:value="i" v-model="exporter.db">
+                    <label v-bind:for="i" v-on:click="getAvailableApi(i)">{{ i }}</label>
+                  </div>
                 </div>
-                <button v-if="exporter.db != ''" v-on:click="exportDb(available[exporter.db])">Export API</button>
+                <div v-if="exporter.db != ''" class="flex">
+                  <button v-on:click="exportDb(available[exporter.db])" v-if="isExportable()">Export {{ exporter.db }} DB</button>
+                  <h2><span v-if="isExportable()">Or e</span><span v-else>E</span>xport an API:</h2>
+                </div>
                 <div class="db-choice" v-if="exporter.db != ''">
-                  <div v-for="i in Object.keys(exporter.availableApi)" v-on:click="exportDb(exporter.availableApi[i])">{{ i }}</div>
+                  <div v-for="i in Object.keys(exporter.availableApi)">
+                    <input type="radio" name="apiName" v-bind:id="i" v-bind:value="i" v-model="exporter.api">
+                    <label v-bind:for="i">{{ i }}</label>
+                  </div>
+                </div>
+                <div class="api-options" v-if="exporter.api != ''">
+                  
+                </div>
+                <div v-if="exporter.api != ''" class="flex">
+                  <button v-on:click="exportDb(exporter.availableApi[exporter.api])">Export {{ exporter.db }} - {{ exporter.api }} API</button>
                 </div>
               </div>
               <button class="btn remove" v-on:click="deleteModel(selectedModel)">Remove Model</button>
@@ -151,7 +166,7 @@
             <button v-on:click="saveModel" class="m-t-50">Save Model</button>
           </div>
           <div class="database" v-on:mousemove="moveItem" v-on:mouseup="stopMovingItem">
-            <div class="db-container" v-bind:style="{transform: scaleContainer()}">
+            <div class="db-container" v-bind:style="{transform: scaleContainer(), top: containerPos.y + 'px', left: containerPos.x + 'px'}" v-on:mousedown="startMovingContainer($event)">
               <svg>
                 <path v-for="item,i in model.connexions" v-if="isComplete(i)" v-bind:d="getPos(i)" v-on:click="selectedConnexion = i; selectedTable = null;">
               </svg>
