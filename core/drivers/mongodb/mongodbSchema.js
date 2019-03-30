@@ -1,4 +1,5 @@
 const Schema = require('../schema');
+const Table = require('../table');
 const fs = require('fs');
 
 module.exports = class MongoDBSchema extends Schema {

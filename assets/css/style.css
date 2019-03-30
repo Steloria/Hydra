@@ -216,6 +216,7 @@ button.remove {
 	top: 0;
 	left: 0;
 	box-shadow: none;
+	transition: box-shadow 0.3s;
 }
 .create .database .db-container:active {
 	box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.3);

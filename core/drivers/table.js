@@ -1,5 +1,4 @@
 module.exports = class Table {
-
     static get TYPE_STRING() { return 'String'; }
     static get TYPE_NUMBER() { return 'Number'; }
     static get TYPE_INT() { return 'Int'; }
@@ -10,12 +9,12 @@ module.exports = class Table {
     static get HAS_ONE() { return 'HasOne'; }
     static get HAS_MANY() { return 'HasMany'; }
 
-    constructor(name) {
+    constructor(name, id) {
         if (!name) {
             throw new Error('Table name is required');
         }
 
-        this.id = Math.random().toString(32).substr(2);
+        this.id = id;
         this.name = name;
         this.fields = {};
         this.relationships = {};
@@ -66,9 +65,9 @@ module.exports = class Table {
             throw new Error('A field with the name ' + name + ' is already set');
         }
 
-        if (![Table.HAS_MANY, Table.HAS_ONE].includes(type)) {
-            throw new Error(`Type must be part of ${Table.HAS_MANY} or ${Table.HAS_ONE}`);
-        }
+        // if (![Table.HAS_MANY, Table.HAS_ONE].includes(type)) {
+        //     throw new Error(`Type must be part of ${Table.HAS_MANY} or ${Table.HAS_ONE}`);
+        // }
 
         this.relationships[name] = {
             name,

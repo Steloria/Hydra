@@ -62,7 +62,7 @@
                   
                 </div>
                 <div v-if="exporter.api != ''" class="flex">
-                  <button v-on:click="exportDb(exporter.availableApi[exporter.api])">Export {{ exporter.db }} - {{ exporter.api }} API</button>
+                  <button v-on:click="exportApi(exporter.availableApi[exporter.api])">Export {{ exporter.db }} - {{ exporter.api }} API</button>
                 </div>
               </div>
               <button class="btn remove" v-on:click="deleteModel(selectedModel)">Remove Model</button>
@@ -91,7 +91,6 @@
             <hr>
             <div v-if="selectedTable != null">
               <input type="text" placeholder="Table Name" v-model="model.tables[selectedTable].name">
-              <button class="m-b-20" v-on:click="addLine"><i class="mi-plus"></i> Add Line</button>
               <div v-for="line, i in model.tables[selectedTable].properties" class="lines">
                 <div class="content">
                   <input type="text" placeholder="Line Name" v-model="line.name">
@@ -126,10 +125,11 @@
                   <button class="remove" v-on:click="removeLine(i)">Remove Line</button>
                 </div>
               </div>
+              <button class="m-b-20" v-on:click="addLine"><i class="mi-plus"></i> Add Line</button>
               <button class="remove m-t-20" v-on:click="removeTable(selectedTable)">Remove Table</button>
             </div>
             <div v-if="selectedConnexion != null" class="form-connexion">
-              <input type="text" placeholder="Relation Name" v-model="model.connexions[selectedConnexion].name">
+              <input type="text" placeholder="Relation Name" v-model="model.connexions[selectedConnexion].name" v-on:change="activateDisplayWithDelay">
               <div class="flex">
                 <p>From:</p>
                 <select v-model="model.connexions[selectedConnexion].from" v-on:change="activateDisplayWithDelay">
@@ -138,14 +138,14 @@
               </div>
               <div class="flex">
                 <p>To:</p>
-                <select v-model="model.connexions[selectedConnexion].to"  v-on:change="activateDisplayWithDelay">
+                <select v-model="model.connexions[selectedConnexion].to" v-on:change="activateDisplayWithDelay">
                   <option v-for="item in model.tables" v-bind:value="item.id">{{ item.name }}</option>
                 </select>
               </div>
 
               <div class="flex m-t-20">
                 <p>Type:</p>
-                <select v-model="model.connexions[selectedConnexion].type">
+                <select v-model="model.connexions[selectedConnexion].type" v-on:change="activateDisplayWithDelay">
                   <option value="">-</option>
                   <option value="1:1">One to One</option>
                   <option value="1:N">One to Many</option>
@@ -170,8 +170,8 @@
               <svg>
                 <path v-for="item,i in model.connexions" v-if="isComplete(i)" v-bind:d="getPos(i)" v-on:click="selectedConnexion = i; selectedTable = null;">
               </svg>
-              <div class="connection-item" v-for="item,i in model.connexions" v-if="isComplete(i) && (item.name != '' || item.type != '')" v-on:click="selectedConnexion = i; selectedTable = null;" v-bind:style="{top: getMidPos(i, 'y') + 'px', left: getMidPos(i, 'x') + 'px'}" v-bind:ref="'conn' + i">{{ item.name }} <span v-if="item.type != ''">({{ item.type }})</span></div>
-              <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.posY + 'px', left: item.posX + 'px'}" v-bind:ref="item.id">
+              <div class="connection-item" v-for="item,i in model.connexions" v-if="(item.name != '' || item.type != '') && isComplete(i)" v-on:click="selectedConnexion = i; selectedTable = null;" v-bind:style="{top: getMidPos(i, 'y') + 'px', left: getMidPos(i, 'x') + 'px'}" v-bind:ref="'conn' + i">{{ item.name }} <span v-if="item.type != ''">({{ item.type }})</span></div>
+              <div v-for="item, index in model.tables" class="db-item" v-on:mousedown="startMovingItem($event, index)" v-on:mouseup="stopMovingItem" v-bind:style="{ top: item.pos.y + 'px', left: item.pos.x + 'px'}" v-bind:ref="item.id">
                 <button v-on:click="selectedTable = index; selectedConnexion = null;"><i class="mi-pen"></i></button>
                 <h3>{{ item.name }}</h3>
                 <div v-for="line in item.properties" class="lines">{{ line.name }} (<span v-bind:class="line.type.toLowerCase()">{{ line.type }}</span><span v-if="line.size != ''"> - {{ line.size }}</span>)</div>

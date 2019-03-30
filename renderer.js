@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require('fs');
 let f = path.join(__dirname, 'assets/json/models.json');
 var drivers = require(path.join(__dirname, 'core/drivers/index.js'));
+var Bezier = require(path.join(__dirname, 'assets/js/Bezier'));
 
 window.onload = function() {
   var home = new Vue({
@@ -43,8 +44,7 @@ window.onload = function() {
       newTable: {
         id: '',
         name: "New Table",
-        posX: 10,
-        posY: 10,
+        pos: {x: 10, y: 10},
         properties: [
           {
             name: 'id',
@@ -121,70 +121,27 @@ window.onload = function() {
         this.selectedConnexion = null;
       },
       getPos: function(i) {
-        if (typeof this.$refs['conn' + i] == "undefined" || typeof this.$refs['conn' + i][0] == "undefined") return;
-
         let linkedTableFrom = this.findById(this.model.connexions[i].from);
         let linkedTableTo = this.findById(this.model.connexions[i].to);
-        let x1 = linkedTableFrom.posX;
-        let y1 = linkedTableFrom.posY;
-        let x2 = linkedTableTo.posX;
-        let y2 = linkedTableTo.posY;
+        if (!this.$refs[linkedTableFrom.id] || !this.$refs[linkedTableTo.id] || this.$refs[linkedTableFrom.id].length < 1) return;
         let h1 = this.$refs[linkedTableFrom.id][0].clientHeight;
         let h2 = this.$refs[linkedTableTo.id][0].clientHeight;
-        var bezier = "";
-
-        if (Math.abs(x2 - x1) > Math.abs(y2 - y1)) {
-          if (x2 - x1 > 0) {
-            bezier = `M${x1 + 250},${y1 + (h1 / 2)} Q${x1 + 280},${y1 + (h1 / 2)} ${(x2 - 30 + x1 + 280) / 2},${(y2 + (h2 / 2) + y1 + (h1 / 2)) / 2}T${x2},${y2 + (h2 / 2)}`;
-          } else {
-            bezier = `M${x1},${y1 + (h1 / 2)} Q${x1 - 30},${y1 + (h1 / 2)} ${(x2 + 280 + x1 - 30) / 2},${(y2 + (h2 / 2) + y1 + (h1 / 2)) / 2} T${x2 + 250},${y2 + (h2 / 2)}`;
-          }
-        } else {
-          if (y2 - y1 > 0) {
-            bezier = `M${x1 + 125},${y1 + h1} Q${x1 + 125},${y1 + h1 + 20} ${(x2 + 125 + x1 + 125) / 2},${(y2 - 20 + y1 + h1 + 20) / 2} T${x2 + 125},${y2}`;
-          } else {
-            bezier = `M${x1 + 125},${y1} Q${x1 + 125},${y1 - 20} ${(x2 + 125 + x1 + 125) / 2},${(y2 - 20 + y1 + 20 + h2) / 2} T${x2 + 125},${y2 + h2}`;
-          }
-        }
-
-        return bezier;
+        
+        let b = new Bezier();
+        return b.getPos(linkedTableFrom, linkedTableTo, h1, h2);
       },
-      getMidPos: function(i, t, e) {
+      getMidPos: function(i, t) {
         if (typeof this.$refs['conn' + i] == "undefined" || typeof this.$refs['conn' + i][0] == "undefined") return;
-
         let linkedTableFrom = this.findById(this.model.connexions[i].from);
         let linkedTableTo = this.findById(this.model.connexions[i].to);
-        let x1 = linkedTableFrom.posX;
-        let y1 = linkedTableFrom.posY;
-        let x2 = linkedTableTo.posX;
-        let y2 = linkedTableTo.posY;
         let h1 = this.$refs[linkedTableFrom.id][0].clientHeight;
         let h2 = this.$refs[linkedTableTo.id][0].clientHeight;
 
-        let x = 0;
-        let y = 0;
-
-        if (Math.abs(x2 - x1) > Math.abs(y2 - y1)) {
-          if (x2 - x1 > 0) {
-            x = (x2 - 30 + x1 + 280) / 2;
-            y = (y2 + (h2 / 2) + y1 + (h1 / 2)) / 2;
-          } else {
-            x = (x2 + 280 + x1 - 30) / 2;
-            y = (y2 + (h2 / 2) + y1 + (h1 / 2)) / 2;
-          }
-        } else {
-          if (y2 - y1 > 0) {
-            x = (x2 + 125 + x1 + 125) / 2;
-            y = (y2 - 20 + y1 + h1 + 20) / 2;
-          } else {
-            x = (x2 + 125 + x1 + 125) / 2;
-            y = (y2 - 20 + y1 + 20 + h2) / 2;
-          }
-        }
-
+        let b = new Bezier();
+        let {x, y} = b.getMidPos(linkedTableFrom, linkedTableTo, h1, h2);
         return t == 'x' ? x - (this.$refs['conn' + i][0].clientWidth / 2) : y - 12;
       },
-      isComplete: function(i) {
+      isComplete: function(i, type) {
         if (this.model.connexions[i].from != '' && this.model.connexions[i].to != '') {
           return true;
         } else {
@@ -205,8 +162,8 @@ window.onload = function() {
         if (this.initialMouse.x == 0 && this.initialMouse.y == 0) {
           this.initialMouse.x = e.screenX;
           this.initialMouse.y = e.screenY;
-          this.initialItemPos.x = this.model.tables[pos].posX;
-          this.initialItemPos.y = this.model.tables[pos].posY;
+          this.initialItemPos.x = this.model.tables[pos].pos.x;
+          this.initialItemPos.y = this.model.tables[pos].pos.y;
         }
         this.movingItem = pos;
         this.isContainerMoving = false;
@@ -228,8 +185,8 @@ window.onload = function() {
           this.containerPos.x = this.initialItemPos.x + ((e.screenX - this.initialMouse.x));
           this.containerPos.y = this.initialItemPos.y + ((e.screenY - this.initialMouse.y));
         } else {
-          if (this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posX = this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1));
-          if (this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].posY = this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1));
+          if (this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].pos.x = this.initialItemPos.x + ((e.screenX - this.initialMouse.x) * Math.abs(((this.model.scale - 1) * -1) + 1));
+          if (this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1)) > 0) this.model.tables[this.movingItem].pos.y = this.initialItemPos.y + ((e.screenY - this.initialMouse.y) * Math.abs(((this.model.scale - 1) * -1) + 1));
         }
       },
       stopMovingItem: function() {
@@ -278,6 +235,15 @@ window.onload = function() {
         this.containerPos = {x: s, y: s};
       },
       saveModel: function() {
+        //remove unfilled connexions
+        for (var i = 0; i < this.model.connexions.length; i++) {
+          let conn = this.model.connexions[i];
+          if (conn.from == "" || conn.to == "") {
+            this.model.connexions.splice(i, 1);
+            i--;
+          } 
+        }
+
         if (this.loaded == null) {
           this.models.push(this.model);
         } else {
@@ -339,16 +305,36 @@ window.onload = function() {
         return db.isExportable();
       },
       exportDb(obj) {
-        let db = new obj(this.models[this.selectedModel].name.toLowerCase());
+        let db = this.buildSchema();
+        //console.log(db.export("/Users/medrupaloscil/Desktop/bdd"));
+      },
+      exportApi(obj) {
+        let api = new obj();
+        api.export("/Users/medrupaloscil/Desktop/test", this.buildSchema());
+      },
+      buildSchema() {
+        let db = new this.available[this.exporter.db](this.models[this.selectedModel].name.toLowerCase());
         for (const i of this.models[this.selectedModel].tables) {
-          let table = new drivers.Table(i.name.toLowerCase());
+          let table = new drivers.Table(i.name.toLowerCase(), i.id);
           for (const j of i.properties) {
             table.setField(j.name.toLowerCase(), j.type, j.required, j.unique, j.default, j.length);
           }
+          for (const i of this.models[this.selectedModel].connexions) {
+
+          }
           db.setTable(table);
         }
-        console.log(db.export("/Users/medrupaloscil/Desktop/test"));
+        for (const i of this.models[this.selectedModel].connexions) {
+          if (i.from != "" && i.to != "") {
+            let from = this.findTableNameFromId(db, i.from);
+            let to = this.findTableNameFromId(db, i.to);
+            db.tables[from].addRelationship(i.name, i.type, db.tables[to]);
+          }
+        }
+
+        return db;
       },
+      
 
       /* Useful Functions */
       makeid: function() {
@@ -373,6 +359,13 @@ window.onload = function() {
         this.model.name += " ";
         this.model.name = name;
       },
+      findTableNameFromId: function(db, id) {
+        for (const i of Object.keys(db.tables)) {
+          if (db.tables[i].id == id) {
+            return db.tables[i].name;
+          }
+        }
+      }
     }
   })
 }
