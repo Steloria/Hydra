@@ -1,9 +1,21 @@
 const { app, BrowserWindow } = require('electron');
 var path = require('path');
-var fs = require('fs');
+var fs = require('fs-extra');
 
 if (process.mas) app.setName('Hydra');
 let mainWindow;
+
+let f = path.join(__dirname, 'assets/json/models.json');
+if (!fs.existsSync(f)) {
+  fs.ensureFile(f)
+    .then(() => {
+      fs.writeFile(f, JSON.stringify([]))
+        .catch(err => {
+          console.log('Error when creating thge file!')
+          console.error(err)
+        });
+    })
+}
 
 function createWindow () {
   mainWindow = new BrowserWindow({
@@ -11,8 +23,11 @@ function createWindow () {
     minWidth: 1000,
     height: 840,
     minHeight: 600,
-    title: app.getName(),
-    icon: path.join(__dirname, 'assets/icon/png/64x64.png')
+    title: app.name,
+    icon: path.join(__dirname, 'assets/icon/png/64x64.png'),
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
   mainWindow.loadFile('index.html');
   mainWindow.maximize()
@@ -20,13 +35,6 @@ function createWindow () {
   mainWindow.on('closed', function () {
     mainWindow = null;
   })
-
-  let f = path.join(__dirname, 'assets/json/models.json');
-  if (!fs.existsSync(f)) {
-    fs.writeFile(f, JSON.stringify("[]"), function(err) {
-        if (err) console.log(err);
-    });
-  }
 }
 
 app.on('ready', createWindow);

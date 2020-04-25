@@ -16,7 +16,8 @@
   "author": "Medrupaloscil",
   "devDependencies": {
     "electron": "^3.0.7",
-    "electron-packager": "^13.0.1"
+    "electron-packager": "^13.0.1",
+    "fs-extra": "^9.0.0"
   },
   "dependencies": {
     "js-beautify": "*",
