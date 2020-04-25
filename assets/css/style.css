@@ -68,6 +68,9 @@ main {
   overflow: scroll;
   box-sizing: border-box;
 }
+main::-webkit-scrollbar {
+	width: 0 !important
+}
 .home {
 	padding: 30px;
 }
@@ -108,6 +111,9 @@ main {
 	display: flex;
     justify-content: center;
     align-items: center;
+}
+.home .add-model div:hover {
+	filter: brightness(90%);
 }
 .home .add-model div i {
 	top: 19px;
@@ -168,6 +174,9 @@ button {
 	color: #FFF;
 	cursor: pointer;
 	position: relative;
+}
+button:hover {
+	filter: brightness(90%);
 }
 button.remove {
 	background-color: var(--color-error);
@@ -403,6 +412,9 @@ button.remove {
 	position: relative;
 	max-height: 80vh;
 	overflow: scroll;
+}
+.popup-container .popup::-webkit-scrollbar {
+	width: 0 !important
 }
 .popup h2 {
 	font-size: 30px;
